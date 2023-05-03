@@ -21,9 +21,13 @@ class Position
     #[ORM\OneToMany(mappedBy: 'position', targetEntity: Player::class)]
     private Collection $players;
 
+    #[ORM\OneToMany(mappedBy: 'position', targetEntity: User::class)]
+    private Collection $users;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +71,36 @@ class Position
             // set the owning side to null (unless already changed)
             if ($player->getPosition() === $this) {
                 $player->setPosition(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setPosition($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getPosition() === $this) {
+                $user->setPosition(null);
             }
         }
 
