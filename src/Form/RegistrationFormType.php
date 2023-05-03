@@ -6,6 +6,7 @@ use App\Entity\User;
 
 use Symfony\Component\Form\AbstractType;
 use Doctrine\DBAL\Types\DateImmutableType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
@@ -27,7 +28,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('firstname',TextType::class)
             ->add('lastname',TextType::class)
-            ->add('nTel',NumberType::class)
+            ->add('nTel',TelType::class)
             ->add('rating',NumberType::class, [
                 'html5' => true,
                 'attr' => [
