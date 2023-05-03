@@ -29,7 +29,12 @@ class RegistrationFormType extends AbstractType
             ->add('lastname',TextType::class)
             ->add('nTel',NumberType::class)
             ->add('rating',NumberType::class, [
-                'attr' => ['placeholder' => 'Rate yourself out of 10'] 
+                'html5' => true,
+                'attr' => [
+                    
+                    'min' => 1,
+                    'max' => 10
+                ] 
             ])
             ->add('birthday',DateType::class, [
                 'widget' => 'single_text'
