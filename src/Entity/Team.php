@@ -14,6 +14,8 @@ class Team
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+
+
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
@@ -41,6 +43,7 @@ class Team
     {
         $this->players = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->creationDate = new \DateTime();
     }
 
     public function getId(): ?int
@@ -166,5 +169,9 @@ class Team
         }
 
         return $this;
+    }
+
+    public function __toString(){
+        return $this->getName();
     }
 }

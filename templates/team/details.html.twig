@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TeamController!{% endblock %}
+
+{% block body %}
+
+<h1>List of teams</h1>
+<table class="table table-dark table-hover">
+    <thead>
+        <th>Name</th>
+        <th>Country</th>
+        <th>City</th>
+    </thead>
+    <tbody>
+            <tr>
+                <td><strong> <a href="" >  {{ team.name }}  </a> </strong> </td>
+                <td><strong> <a href="" >  {{ team.country }}  </a> </strong> </td>
+                <td><strong> <a href="" >  {{ team.city }}  </a> </strong> </td>
+                {# <td><strong> <a href="" >  {{ team.creationdate }}  </a> </strong> </td> #}
+                
+                {# <td> <a class="btn btn-danger"  href="{{path('delete_entreprise', {'id' : entreprise.id})}}">  Delete</a></td> #}
+            </tr>
+    </tbody>
+
+</table class="table table-dark table-hover">
+
+{% if team.users |length>0 %}
+    
+
+    <h3>Team players </h3>
+
+        <table>
+            <tbody> 
+                {% for user in team.users %}
+                <tr>
+                    <td><strong> <a href="" >  {{ user.name }}  </a> </strong></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endif %}
+
+<br> <a class="btn btn-primary" href="">Add players</a>
+        
+   
+
+{% endblock %}
