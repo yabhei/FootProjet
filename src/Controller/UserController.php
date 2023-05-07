@@ -20,4 +20,15 @@ class UserController extends AbstractController
         
         ]);
     }
+
+    #[Route('/userteam/{id}', name: 'user_team')]
+    public function addUserToTeam(ManagerRegistry $doctrine): Response
+    {
+        $users = $doctrine->getRepository(User::class) ->findAll();
+        
+        return $this->render('user/usertoadd.html.twig', [
+            'users'=>$users
+        
+        ]);
+    }
 }

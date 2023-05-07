@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Team;
+use App\Entity\User;
 use App\Form\TeamType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,15 +56,35 @@ class TeamController extends AbstractController
 
 
         #[Route('/team/{id}', name:'details_team')]
-    public function  details_Team(Team $team): Response
+    public function  details_Team(Team $team, ManagerRegistry $doctrine, User $user): Response
     {
-
+        $users = $doctrine->getRepository(User::class) ->findAll();
         return $this->render('team/details.html.twig', [
-            'team'=>$team
+            'team'=>$team,
+            'users'=>$users
+            
         
         ]);
 
     }
+
+
+    #[Route('/team/{idteam}/{iduser}', name:'add_usertoteam')]
+    public function  AddUserToTeam(Team $team, User $user, ManagerRegistry $doctrine): Response
+    {
+        $team->addUser($user);
+        $users = $doctrine->getRepository(User::class) ->findAll();
+        return $this->render('team/details.html.twig', [
+            'team'=>$team,
+            'users'=>$users
+            
+            
+        
+        ]);
+
+    }
+
+
 
 
 }

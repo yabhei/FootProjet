@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TeamController!{% endblock %}
+
+{% block body %}
+
+
+<div id="teamt" style="margin: 3%;">
+    
+<table class="table table-dark table-hover" >
+    <thead>
+        <th>Name</th>
+        <th>Country</th>
+        <th>City</th>
+    </thead>
+    <tbody>
+            <tr>
+                <td><strong> <a href="" >  {{ team.name }}  </a> </strong> </td>
+                <td><strong> <a href="" >  {{ team.country }}  </a> </strong> </td>
+                <td><strong> <a href="" >  {{ team.city }}  </a> </strong> </td>
+                {# <td><strong> <a href="" >  {{ team.creationdate }}  </a> </strong> </td> #}
+                
+                {# <td> <a class="btn btn-danger"  href="{{path('delete_entreprise', {'id' : entreprise.id})}}">  Delete</a></td> #}
+            </tr>
+    </tbody>
+
+</table >
+</div>
+
+
+
+{% endblock %}
