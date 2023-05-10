@@ -9,7 +9,7 @@
     {% for user in users %}
 
             <tr>
-                <td><strong> <a href="" >  {{ user.firstname}} {{user.lastname }}  </a> </strong> </td>
+                <td><strong> <a href="{{path('details_user', {'id' : user.id})}}" >  {{ user.firstname}} {{user.lastname }}  </a> </strong> </td>
                 {# <td> <a class="btn btn-danger"  href="{{path('delete_entreprise', {'id' : entreprise.id})}}">  Delete</a></td> #}
             </tr>
     {% endfor %}
