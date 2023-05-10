@@ -56,7 +56,7 @@ class TeamController extends AbstractController
 
 
         #[Route('/team/{id}', name:'details_team')]
-    public function  details_Team(Team $team, ManagerRegistry $doctrine, User $user): Response
+    public function  details_Team(Team $team, ManagerRegistry $doctrine): Response
     {
         $users = $doctrine->getRepository(User::class) ->findAll();
         return $this->render('team/details.html.twig', [
@@ -69,9 +69,10 @@ class TeamController extends AbstractController
     }
 
 
-    #[Route('/team/{idteam}/{iduser}', name:'add_usertoteam')]
-    public function  AddUserToTeam(Team $team, User $user, ManagerRegistry $doctrine): Response
+    #[Route('/team/{id_team}/{id_user}', name:'add_usertoteam')]
+    public function  AddUserToTeam(Team $team ,$id_user,  ManagerRegistry $doctrine): Response
     {
+        $user = $doctrine->getRepository(User::class) ->find($id_user);
         $team->addUser($user);
         $users = $doctrine->getRepository(User::class) ->findAll();
         return $this->render('team/details.html.twig', [
@@ -83,8 +84,5 @@ class TeamController extends AbstractController
         ]);
 
     }
-
-
-
-
+    
 }

@@ -21,14 +21,42 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/userteam/{id}', name: 'user_team')]
-    public function addUserToTeam(ManagerRegistry $doctrine): Response
-    {
-        $users = $doctrine->getRepository(User::class) ->findAll();
+    // #[Route('/userteam/{id}', name: 'user_team')]
+    // public function addUserToTeam(ManagerRegistry $doctrine): Response
+    // {
+    //     $users = $doctrine->getRepository(User::class) ->findAll();
         
-        return $this->render('user/usertoadd.html.twig', [
-            'users'=>$users
+    //     return $this->render('user/usertoadd.html.twig', [
+    //         'users'=>$users
+        
+    //     ]);
+    // }
+
+
+    #[Route('/user_details/{id}', name:'details_user')]
+    public function  details_User( User $user): Response
+    {
+        
+        return $this->render('user/detailsUser.html.twig', [
+            'user'=>$user,
+            
+            
         
         ]);
+
     }
+
+    #[Route('/my_details/{id}', name:'my_details')]
+    public function  My_details( User $user): Response
+    {
+        
+        return $this->render('user/My_details.html.twig', [
+            'user'=>$user,
+            
+            
+        
+        ]);
+
+    }
+
 }
