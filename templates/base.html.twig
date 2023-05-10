@@ -25,12 +25,16 @@
             <ol>
                 <a href="{{ path('app_home') }}">Home</a>
                 <a href="{{ path('my_details',{'id':app.user.id}) }}">My profile</a>
+                <a href="{{ path('app_team') }}">Teams</a>
+                <a href="{{ path('app_user') }}">Players</a>
                 {% if not app.user.team %}
                 <a href="{{ path('add_team') }}">Creat Team</a>
                 {% endif %}
+                {% if app.user.captain %}
+                <a href="">Make Match</a>
+                {% endif %}
                
-                <a href="{{ path('app_team') }}">Teams</a>
-                <a href="{{ path('app_user') }}">Players</a>
+                
                 <a href="{{ path('app_logout') }}">Logout</a>
                 
             </ol>
@@ -95,6 +99,8 @@
       <!-- Section: Social media -->
   
     </div>
+
+  
     <!-- Grid container -->
   </footer> 
   <!-- Footer -->

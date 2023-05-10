@@ -24,39 +24,50 @@ class TeamController extends AbstractController
         ]);
     }
 
-    #[Route('/add', name: 'add_team')]
-    public function AddTeam(ManagerRegistry $doctrine, Request $request): Response
-    {
 
-        
-        $team = new Team();
-        $user =$this->getUser();
-        $team->setCaptain($user);
-        $user->setCaptain(true);
-        $form = $this->createForm(TeamType::class, $team );
 
-        $form->handleRequest($request);
+    #[Route('/add', name: 'add_team')] // Defines a new route
+public function AddTeam(ManagerRegistry $doctrine, Request $request): Response // Defines a function with two parameters, the first one is an instance of ManagerRegistry class and the second one is a Request object. It returns a Response object.
+{
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $team = $form->getData();
-            $entityManager = $doctrine->getManager();
+    // Create a new Team object
+    $team = new Team();
+    
+    // Set the current user as the captain of the team
+    $user = $this->getUser();
+    $team->setCaptain($user);
+    $user->setCaptain(true);
+    
+    // Create a form object using the TeamType class and the $team object
+    $form = $this->createForm(TeamType::class, $team );
 
-            $entityManager->persist($team);
-            $entityManager->flush();
-            // $this->addFlash($team->getName()." added successfully");
-            return $this->redirectToRoute("app_team");
-        } else {
-            return $this->render('team/add_team.html.twig', [
-                'form' => $form->createView(),
-                'user' => $this->getUser()
-            ]);
-        }
-        
+    // Handle the form submission
+    $form->handleRequest($request);
 
-        // return $this->render('team/add_team.html.twig', [
-        //     'form' => $form->createView(),
-        // ]);
+    if ($form->isSubmitted() && $form->isValid()) { // If the form is submitted and valid
+
+        // Get the data from the form
+        $team = $form->getData();
+
+        // Get the entity manager and persist the team object
+        $entityManager = $doctrine->getManager();
+        $entityManager->persist($team);
+
+        // Flush changes to the database
+        $entityManager->flush();
+
+        // Redirect to the team page
+        return $this->redirectToRoute("app_team");
+
+    } else { // If the form is not submitted or not valid
+
+        // Render the add team form template
+        return $this->render('team/add_team.html.twig', [
+            'form' => $form->createView(),
+            'user' => $this->getUser()
+        ]);
     }
+}
 
 
         #[Route('/team/{id}', name:'details_team')]
