@@ -58,6 +58,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Position $position = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $captain = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -240,6 +243,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString(){
         return  $this->firstname . ' ' . $this->lastname ;
+    }
+
+    public function isCaptain(): ?bool
+    {
+        return $this->captain;
+    }
+
+    public function setCaptain(?bool $captain): self
+    {
+        $this->captain = $captain;
+
+        return $this;
     }
 
 }
