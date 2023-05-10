@@ -41,9 +41,12 @@
                 {% for user in team.users %}
                 <tr>
                     <td><strong> <a href="{{path('details_user', {'id' : user.id})}}" >  {{ user.firstname }} {{user.lastname}}  </a> </strong></td>
+                    {% if app.user == team.captain %}
                     <td>
                         <a class="btn btn-danger" href="{{path('remove_userfromteam', {'id':team.id, 'id_user':user.id})}}">Remove</a>
                     </td>
+                    {% endif %}
+                    
                 </tr>
                 {% endfor %}
             </tbody>
@@ -64,9 +67,12 @@
         {% if not user.team %}
         <td><strong> <a href="{{path('details_user', {'id' : user.id})}}" >  
             {{ user.firstname}} {{user.lastname}}  </a> </strong> </td>
-        <td>
-            <a class="btn btn-success" href="{{path('add_usertoteam', {'id':team.id, 'id_user':user.id})}}">Add</a>
-        </td>
+            {% if app.user == team.captain %}
+            <td>
+                <a class="btn btn-success" href="{{path('add_usertoteam', {'id':team.id, 'id_user':user.id})}}">Add</a>
+            </td>
+            {% endif %}
+        
         {% endif %}
            
                
