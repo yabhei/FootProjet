@@ -4,25 +4,35 @@
 
 {% block body %}
 
-
-<div id="teamt" style="margin: 3%;">
-    <h1>Details of the team :</h1>
+{% set age = date().diff(date(user.birthday)).y %}
+<div id="user" style="margin: 3%;">
+    <h1>Details of the player :</h1>
 <table class="table table-dark table-hover" >
-    <thead>
+    <thead >
         <th>Name</th>
-        <th>Country</th>
+        {# <th>LastName</th> #}
+        <th>Email</th>
+        <th>Age</th>
+        <th>Phone Number</th>
+        <th>Team</th>
+        <th>Position</th>
+        <th>Rating</th>
         <th>City</th>
     </thead>
     <tbody>
             <tr>
-                <td><strong> <a href="" >  {{ team.name }}  </a> </strong> </td>
-                <td><strong> <a href="" >  {{ team.country }}  </a> </strong> </td>
-                <td><strong> <a href="" >  {{ team.city }}  </a> </strong> </td>
-                {# <td><strong> <a href="" >  {{ team.creationdate }}  </a> </strong> </td> #}
-                
-                {# <td> <a class="btn btn-danger"  href="{{path('delete_entreprise', {'id' : entreprise.id})}}">  Delete</a></td> #}
+                <td><strong> <a href="" >  {{ user.firstname }} {{ user.lastname }} </a> </strong> </td>
+                {# <td><strong> <a href="" >  {{ user.lastname }}  </a> </strong> </td> #}
+                <td><strong>   {{ user.email }}  </strong> </td>
+                <td><strong>   {{ age }}   </strong> </td>
+                <td><strong>   {{ user.nTel }}   </strong> </td>
+                <td><strong>   {{ user.getTeam() }}   </strong> </td>
+                <td><strong>   {{ user.position.title }}   </strong> </td>
+                <td><strong>   {{ user.rating }}   </strong> </td>
+                <td><strong>   {{ user.city }}   </strong> </td>                
             </tr>
     </tbody>
 
 </table >
 </div>
+{% endblock %}
