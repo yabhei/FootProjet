@@ -30,12 +30,15 @@ class TeamController extends AbstractController
 
         
         $team = new Team();
+        $user =$this->getUser();
+        $team->setCaptain($user);
+        $user->setCaptain(true);
         $form = $this->createForm(TeamType::class, $team );
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            $team = $form->getData(); 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $team = $form->getData();
             $entityManager = $doctrine->getManager();
 
             $entityManager->persist($team);
@@ -45,6 +48,7 @@ class TeamController extends AbstractController
         } else {
             return $this->render('team/add_team.html.twig', [
                 'form' => $form->createView(),
+                'user' => $this->getUser()
             ]);
         }
         
@@ -59,6 +63,7 @@ class TeamController extends AbstractController
     public function  details_Team(Team $team, ManagerRegistry $doctrine): Response
     {
         $users = $doctrine->getRepository(User::class) ->findAll();
+        
         return $this->render('team/details.html.twig', [
             'team'=>$team,
             'users'=>$users
@@ -69,11 +74,17 @@ class TeamController extends AbstractController
     }
 
 
-    #[Route('/team/{id_team}/{id_user}', name:'add_usertoteam')]
-    public function  AddUserToTeam(Team $team ,$id_user,  ManagerRegistry $doctrine): Response
+    #[Route('/team/addplayer/{id}/{id_user}', name:'add_usertoteam')]
+    public function  AddUserToTeam($id,$id_user,Team $team, ManagerRegistry $doctrine): Response
     {
         $user = $doctrine->getRepository(User::class) ->find($id_user);
-        $team->addUser($user);
+        $one_team = $doctrine->getRepository(Team::class) ->find($id);
+        $one_team->addUser($user);
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->persist($team);
+        $entityManager->flush();
+
         $users = $doctrine->getRepository(User::class) ->findAll();
         return $this->render('team/details.html.twig', [
             'team'=>$team,
@@ -84,5 +95,28 @@ class TeamController extends AbstractController
         ]);
 
     }
-    
+
+
+    #[Route('/team/remove/{id}/{id_user}', name:'remove_userfromteam')]
+    public function  RemoveUserFromTeam($id,$id_user,Team $team, ManagerRegistry $doctrine): Response
+    {
+        $user = $doctrine->getRepository(User::class) ->find($id_user);
+        $one_team = $doctrine->getRepository(Team::class) ->find($id);
+        $one_team->removeUser($user);
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->persist($team);
+        $entityManager->flush();
+        
+        $users = $doctrine->getRepository(User::class) ->findAll();
+        return $this->render('team/details.html.twig', [
+            'team'=>$team,
+            'users'=>$users
+            
+            
+        
+        ]);
+
+    }
+
 }

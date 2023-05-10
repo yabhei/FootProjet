@@ -39,6 +39,9 @@ class Team
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: User::class)]
     private Collection $users;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $captain = null;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
@@ -173,5 +176,17 @@ class Team
 
     public function __toString(){
         return $this->getName();
+    }
+
+    public function getCaptain(): ?string
+    {
+        return $this->captain;
+    }
+
+    public function setCaptain(?string $captain): self
+    {
+        $this->captain = $captain;
+
+        return $this;
     }
 }
