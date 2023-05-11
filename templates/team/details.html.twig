@@ -34,7 +34,9 @@
 {% if team.users |length>0 %}
     
 <div style="margin: 3%;">
-    <h3>Team players </h3>
+    <div style="float: left;"><h3>Team players : </h3></div>
+    <div style="float: right;"><h4 >Number of players : {{ team.users|length }}</h4></div>
+    
 
         <table class="table table-dark table-hover">
             <tbody> 
@@ -43,7 +45,7 @@
                     <td><strong> <a href="{{path('details_user', {'id' : user.id})}}" >  {{ user.firstname }} {{user.lastname}}  </a> </strong></td>
                     {% if app.user == team.captain %}
                     <td>
-                        <a class="btn btn-danger" href="{{path('remove_userfromteam', {'id':team.id, 'id_user':user.id})}}">Remove</a>
+                        <a class="btn btn-danger" href="{{path('remove_userfromteam', {'id':team.id, 'id_user':user.id})}}" style="float: right;">Remove</a>
                     </td>
                     {% endif %}
                     
@@ -57,7 +59,13 @@
 {% endif %}
 </div>
 
+{% if team.users|length >= 11 %}
+
+    <h2 class="" style="background-color: darkgoldenrod;">Good job, your team is complete <i class="fa-solid fa-party-horn"></i></h2>
+    
+{% else %}
 <div id="tusers" style="margin: 3%;">
+
    <a href=""> <h2>Add Players : </h2> </a>
    <div class="overflow-auto">
 <table class="table table-dark table-hover">
@@ -69,18 +77,15 @@
             {{ user.firstname}} {{user.lastname}}  </a> </strong> </td>
             {% if app.user == team.captain %}
             <td>
-                <a class="btn btn-success" href="{{path('add_usertoteam', {'id':team.id, 'id_user':user.id})}}">Add</a>
+                <a class="btn btn-success" href="{{path('add_usertoteam', {'id':team.id, 'id_user':user.id})}}" style="float: right;">Add</a>
             </td>
             {% endif %}
         
         {% endif %}
-           
-               
-   
-                
-    </tr>
-        
-    {% endfor %}
+
+           </tr>
+        {% endfor %}
+    {% endif %} 
     </tbody>
 </table>
 </div>
