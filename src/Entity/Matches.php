@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\MatchesRepository;
+use Date;
+use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MatchesRepository;
 
 #[ORM\Entity(repositoryClass: MatchesRepository::class)]
 class Matches
@@ -14,16 +17,28 @@ class Matches
     private ?int $id = null;
 
     #[ORM\Column(length: 70)]
-    private ?string $team_1 = null;
+    private ?string $team1 = null;
 
     #[ORM\Column(length: 70)]
-    private ?string $team_2 = null;
+    private ?string $team2 = null;
 
     #[ORM\Column]
-    private ?int $result_1 = null;
+    private ?int $result1 = null;
 
     #[ORM\Column]
-    private ?int $result_2 = null;
+    private ?int $result2 = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?DateTimeInterface $date_match = null;
+
+
+    public function __construct()
+    {
+      
+        
+        
+    }
+
 
     public function getId(): ?int
     {
@@ -32,48 +47,60 @@ class Matches
 
     public function getTeam1(): ?string
     {
-        return $this->team_1;
+        return $this->team1;
     }
 
-    public function setTeam1(string $team_1): self
+    public function setTeam1(string $team1): self
     {
-        $this->team_1 = $team_1;
+        $this->team1 = $team1;
 
         return $this;
     }
 
     public function getTeam2(): ?string
     {
-        return $this->team_2;
+        return $this->team2;
     }
 
-    public function setTeam2(string $team_2): self
+    public function setTeam2(string $team2): self
     {
-        $this->team_2 = $team_2;
+        $this->team2 = $team2;
 
         return $this;
     }
 
     public function getResult1(): ?int
     {
-        return $this->result_1;
+        return $this->result1;
     }
 
-    public function setResult1(int $result_1): self
+    public function setResult1(int $result1): self
     {
-        $this->result_1 = $result_1;
+        $this->result1 = $result1;
 
         return $this;
     }
 
     public function getResult2(): ?int
     {
-        return $this->result_2;
+        return $this->result2;
     }
 
-    public function setResult2(int $result_2): self
+    public function setResult2(int $result2): self
     {
-        $this->result_2 = $result_2;
+        $this->result2 = $result2;
+
+        return $this;
+    }
+
+    public function getDateMatch(): ?DateTimeInterface
+    {
+        return $this->date_match;
+    }
+
+    public function setDateMatch(DateTimeInterface $date_match): self
+    {
+        $this->date_match = $date_match;
 
         return $this;
     }

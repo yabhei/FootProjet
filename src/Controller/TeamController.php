@@ -77,9 +77,10 @@ public function AddTeam(ManagerRegistry $doctrine, Request $request): Response /
 #[Route('/remove/{id}', name: 'remove_team')] // Defines a new route
 public function RemoveTeam($id ,ManagerRegistry $doctrine, Request $request, TeamRepository $teamRepository,EntityManagerInterface $entitymanager): Response // Defines a function with two parameters, the first one is an instance of ManagerRegistry class and the second one is a Request object. It returns a Response object.
 {
-
+       
         $team = $doctrine->getRepository(Team::class)->find($id);
-        $team->users->clear();
+        dump($team);
+        $team->getUsers()->clear();
         $entitymanager->persist($team);
         $entitymanager->remove($team);
         $entitymanager->flush();

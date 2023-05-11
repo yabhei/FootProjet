@@ -3,18 +3,18 @@
 {% block title %}Hello MatchesController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div >
+    {% for match in matches %}
+      <div >
+        <div ><h3>{{ match.getDateMatch()|date("d/m/Y") }}</h3></div><div class="col-xs-4" ><h3>{{ match.team1 }}</h3></div>
+        <div class="col-xs-2" ><h3>{{ match.result1 }} {{ "-" }} {{ match.result2 }}</h3></div>
+        <div ><h3>{{ match.team2 }}</h3></div>
+        
+            
+        
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/FootProjet/src/Controller/MatchesController.php'|file_link(0) }}">src/Controller/MatchesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/FootProjet/templates/matches/index.html.twig'|file_link(0) }}">templates/matches/index.html.twig</a></code></li>
-    </ul>
+      </div>  
+    {% endfor %}
 </div>
 {% endblock %}

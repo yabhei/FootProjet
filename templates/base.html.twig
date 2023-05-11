@@ -27,11 +27,11 @@
                 <a href="{{ path('my_details',{'id':app.user.id}) }}">My profile</a>
                 <a href="{{ path('app_team') }}">Teams</a>
                 <a href="{{ path('app_user') }}">Players</a>
-                {% if not app.user.team %}
+                {% if not app.user.team or is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('add_team') }}">Creat Team</a>
                 {% endif %}
                 {% if app.user.captain %}
-                <a href="">Make Match</a>
+                <a href="{{ path('make_match') }}">Make Match</a>
                 {% endif %}
                
                 
