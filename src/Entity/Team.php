@@ -42,11 +42,15 @@ class Team
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $captain = null;
 
+    #[ORM\ManyToMany(targetEntity: Matches::class)]
+    private Collection $matches;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->creationDate = new \DateTime();
+        $this->matches = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -186,6 +190,30 @@ class Team
     public function setCaptain(?string $captain): self
     {
         $this->captain = $captain;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Matches>
+     */
+    public function getMatches(): Collection
+    {
+        return $this->matches;
+    }
+
+    public function addMatch(Matches $match): self
+    {
+        if (!$this->matches->contains($match)) {
+            $this->matches->add($match);
+        }
+
+        return $this;
+    }
+
+    public function removeMatch(Matches $match): self
+    {
+        $this->matches->removeElement($match);
 
         return $this;
     }

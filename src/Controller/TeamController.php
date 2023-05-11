@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Team;
 use App\Entity\User;
 use App\Form\TeamType;
+use App\Repository\TeamRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +19,7 @@ class TeamController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $teams = $doctrine->getRepository(Team::class) ->findAll();
+       
         
         return $this->render('team/index.html.twig', [
             'teams'=>$teams
@@ -36,6 +39,7 @@ public function AddTeam(ManagerRegistry $doctrine, Request $request): Response /
     // Set the current user as the captain of the team
     $user = $this->getUser();
     $team->setCaptain($user);
+    $team->addUser($user);
     $user->setCaptain(true);
     
     // Create a form object using the TeamType class and the $team object
@@ -70,6 +74,30 @@ public function AddTeam(ManagerRegistry $doctrine, Request $request): Response /
 }
 
 
+#[Route('/remove/{id}', name: 'remove_team')] // Defines a new route
+public function RemoveTeam($id ,ManagerRegistry $doctrine, Request $request, TeamRepository $teamRepository,EntityManagerInterface $entitymanager): Response // Defines a function with two parameters, the first one is an instance of ManagerRegistry class and the second one is a Request object. It returns a Response object.
+{
+
+        $team = $doctrine->getRepository(Team::class)->find($id);
+        $team->users->clear();
+        $entitymanager->persist($team);
+        $entitymanager->remove($team);
+        $entitymanager->flush();
+        
+
+        // Redirect to the team page
+        return $this->redirectToRoute("app_team");
+
+
+        // Render the add team form template
+        // return $this->render('team/add_team.html.twig', [
+        //     'form' => $form->createView(),
+        //     'user' => $this->getUser()
+        // ]);
+    
+}
+
+
         #[Route('/team/{id}', name:'details_team')]
     public function  details_Team(Team $team, ManagerRegistry $doctrine): Response
     {
@@ -86,10 +114,11 @@ public function AddTeam(ManagerRegistry $doctrine, Request $request): Response /
 
 
     #[Route('/team/addplayer/{id}/{id_user}', name:'add_usertoteam')]
-    public function  AddUserToTeam($id,$id_user,Team $team, ManagerRegistry $doctrine): Response
+    public function  AddUserToTeam($id,$id_user,Team $team, ManagerRegistry $doctrine, EntityManagerInterface $entitymanager): Response
     {
         $user = $doctrine->getRepository(User::class) ->find($id_user);
         $one_team = $doctrine->getRepository(Team::class) ->find($id);
+        // $test = $entitymanager->getRepository(Team::class)->remove($one_team);
         $one_team->addUser($user);
 
         $entityManager = $doctrine->getManager();
@@ -129,5 +158,8 @@ public function AddTeam(ManagerRegistry $doctrine, Request $request): Response /
         ]);
 
     }
+
+
+
 
 }
