@@ -4,17 +4,80 @@
 
 {% block body %}
 
-    <div >
-    {% for match in matches %}
-      <div >
-        <div ><h3>{{ match.getDateMatch()|date("d/m/Y") }}</h3></div><div class="col-xs-4" ><h3>{{ match.team1 }}</h3></div>
-        <div class="col-xs-2" ><h3>{{ match.result1 }} {{ "-" }} {{ match.result2 }}</h3></div>
-        <div ><h3>{{ match.team2 }}</h3></div>
-        
-            
-        
+<style>
+  /* Add some basic styling */
+  #finished-matches {
+    border-radius: 10px;
+    padding: 3%;
+    background-color: darkslategray;
+    color: white;
+    border: 1px solid black;
+    padding: 10px;
+    float: right; /* Switch float to right */
+    width: 47%;
+  }
 
-      </div>  
-    {% endfor %}
+  #upcoming-matches {
+    border-radius: 10px;
+    padding: 3%;
+    background-color: darkslategray;
+    color: white;
+    border: 1px solid black;
+    padding: 10px;
+    float: left; /* Switch float to left */
+    width: 47%;
+  }
+
+  .match-result {
+    display: inline-block;
+    width: fit-content;
+    background-color: #eaeaea;
+    border-radius: 5px;
+    color: #333;
+    font-size: 12px;
+    padding: 3px 5px;
+  } 
+
+</style>
+
+{% set today = "now"|date("d-m-Y") %}
+
+<div style=" margin: 3%;">
+   
+
+      <div id="finished-matches">
+        <h2>Finished Matches :</h2>
+       
+        <ul>
+          {% for match in matches %}
+
+          {% if match.getDateMatch()|date("d/m/Y") < today %}
+            
+         
+          <li>{{ match.team1 }} <div class="match-result"> {{ match.result1 }} {{ ":" }} {{ match.result2 }}</div>  {{ match.team2 }} 
+          {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")" }}</li>
+
+          {% endif %}
+
+          {% endfor %}
+        </ul>
+      </div>
+    
+      <div id="upcoming-matches">
+        <h2>Upcoming Matches :</h2>
+        <ul>
+          {% for match in matches %}
+          {% if match.getDateMatch()|date("d/m/Y") >= today %}
+          <li>{{ match.team1 }}  {{ "VS."}}  {{ match.team2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")" }}</li>
+          {% endif %}
+          {% endfor %}
+
+        </ul>
+      </div>
+
+
+
+
+   
 </div>
 {% endblock %}
