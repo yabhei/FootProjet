@@ -1,100 +1,104 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-        
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        <link rel="stylesheet" href="my_style.css">
-        <script src="https://kit.fontawesome.com/4dab75bc97.js" crossorigin="anonymous"></script>
-        
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-<style>
-  footer {
-    background-color: black;
-    color: white;
-    height: 70px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
-  
-  .links {
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .links a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-  }
-  
-  .social-icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-  
-  .social-icons a {
-    margin: 0 10px;
-    font-size: 24px;
-  }
-</style>
-  
-      {% if app.user %}  
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <ol>
-                <a href="{{ path('app_home') }}">Home</a>
-                <a href="{{ path('my_details',{'id':app.user.id}) }}">My profile</a>
-                <a href="{{ path('app_team') }}">Teams</a>
-                <a href="{{ path('app_user') }}">Players</a>
-                <a href="{{ path('app_matches') }}">Matches</a>
-                {% if not app.user.team or is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('add_team') }}">Creat Team</a>
-                {% endif %}
-                {% if app.user.captain %}
-                <a href="{{ path('make_match') }}">Make Match</a>
-                {% endif %}
-               
-                
-                <a href="{{ path('app_logout') }}">Logout</a>
-                
-            </ol>
-        </nav>
-   
-    {% else %}
-        <a href="{{ path('app_matches') }}">Matches</a>
-        <a href="{{ path('app_login') }}">Login</a>
-        <a href="{{ path('app_register') }}">Register</a>
-    {% endif %}
+<head>
 
-        {% if is_granted('ROLE_ADMIN') %}
+  <meta charset="UTF-8">
+  <title>{% block title %}Welcome!{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+  <link rel="stylesheet" href="my_style.css">
+  <script src="https://kit.fontawesome.com/4dab75bc97.js" crossorigin="anonymous"></script>
+
+  {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+  {% block stylesheets %}
+  {{ encore_entry_link_tags('app') }}
+  {% endblock %}
+
+  {% block javascripts %}
+  {{ encore_entry_script_tags('app') }}
+  {% endblock %}
+</head>
+
+<body>
+  <style>
+    footer {
+      background-color: black;
+      color: white;
+      height: 70px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .links {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      margin-bottom: 10px;
+    }
+
+    .links a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .social-icons a {
+      margin: 0 10px;
+      font-size: 24px;
+    }
+  </style>
+
+  {% if app.user %}
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ol>
+      <a href="{{ path('app_home') }}">Home</a>
+      <a href="{{ path('my_details',{'id':app.user.id}) }}">My profile</a>
+      <a href="{{ path('app_team') }}">Teams</a>
+      <a href="{{ path('app_user') }}">Players</a>
+      <a href="{{ path('app_matches') }}">Matches</a>
+      {% if not app.user.team or is_granted('ROLE_ADMIN') %}
+      <a href="{{ path('add_team') }}">Creat Team</a>
+      {% endif %}
+      {% if app.user.captain %}
+      <a href="{{ path('make_match') }}">Make Match</a>
+      {% endif %}
 
 
-            
-        {% endif %}
-        
+      <a href="{{ path('app_logout') }}">Logout</a>
+
+    </ol>
+  </nav>
+
+  {% else %}
+  <a href="{{ path('app_matches') }}">Matches</a>
+  <a href="{{ path('app_login') }}">Login</a>
+  <a href="{{ path('app_register') }}">Register</a>
+  {% endif %}
+
+  {% if is_granted('ROLE_ADMIN') %}
+
+
+
+  {% endif %}
+
   {% block body %}
 
   <footer>
-          
+
     <div class="social-icons">
       <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
       <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
@@ -107,54 +111,45 @@
       <a href="#">Terms of Use</a>
     </div>
   </footer>
-  
-  {% endblock %}      
-      
 
-  
- 
-        <!-- Footer -->
- {# <footer class="bg-dark text-center text-white" style="margin-bottom: 0%; margin-top: 28%;" > 
+  {% endblock %}
+
+
+
+
+  <!-- Footer -->
+  {# <footer class="bg-dark text-center text-white" style="margin-bottom: 0%; margin-top: 28%;">
     <!-- Grid container -->
     <div class="container p-4">
       <!-- Section: Social media -->
       <section class="mb-4">
         <!-- Facebook -->
         <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-            <i class="fab fa-facebook-f"></i></a>
-  
+          <i class="fab fa-facebook-f"></i></a>
+
         <!-- Twitter -->
-        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-          ><i class="fab fa-twitter"></i
-        ></a>
-  
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+
         <!-- Google -->
-        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-          ><i class="fab fa-google"></i
-        ></a>
-  
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-google"></i></a>
+
         <!-- Instagram -->
-        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-          ><i class="fab fa-instagram"></i
-        ></a>
-  
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+
         <!-- Linkedin -->
-        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-          ><i class="fab fa-linkedin-in"></i
-        ></a>
-  
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+
         <!-- Github -->
-        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-          ><i class="fab fa-github"></i
-        ></a>
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
       </section>
       <!-- Section: Social media -->
-  
+
     </div>
 
-  
+
     <!-- Grid container -->
-  </footer>  #}
+  </footer> #}
   <!-- Footer -->
-    </body>
+</body>
+
 </html>

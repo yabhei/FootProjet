@@ -1,28 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TeamController!{% endblock %}
+{% block title %}Teams{% endblock %}
 
 {% block body %}
 
 <div style="margin: 3%;">
-<h1>List of teams</h1>
-<table class="table table-dark table-hover" >
+    <h1>List of teams</h1>
+    <table class="table table-dark table-hover">
 
-    <tbody>
-    {% for team in teams %}
+        <tbody>
+            {% for team in teams %}
 
             <tr>
-                <td><strong> <a href="{{ path('details_team', {'id' : team.id }) }}" >  {{ team }}  </a> </strong> </td>
+                <td><strong> <a href="{{ path('details_team', {'id' : team.id }) }}"> {{ team }} </a> </strong> </td>
                 {% if is_granted('ROLE_ADMIN') or app.user == team.captain %}
                 <td>
-                    <a class="btn btn-danger" href="{{path('remove_team', {'id':team.id})}}" >Remove</a>
+                    <a class="btn btn-danger" href="{{path('remove_team', {'id':team.id})}}">Remove</a>
                 </td>
                 {% endif %}
-               
+
             </tr>
-    {% endfor %}
-</tbody>
-</table>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
         
    

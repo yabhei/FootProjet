@@ -18,7 +18,7 @@ class TeamController extends AbstractController
     #[Route('/team', name: 'app_team')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        $teams = $doctrine->getRepository(Team::class) ->findAll();
+        $teams = $doctrine->getRepository(Team::class) ->findAll();                   
        
         
         return $this->render('team/index.html.twig', [
