@@ -26,7 +26,11 @@
                 <td><strong>   {{ user.email }}  </strong> </td>
                 <td><strong>   {{ age }}   </strong> </td>
                 <td><strong>   {{ user.nTel }}   </strong> </td>
+                {% if user.getTeam() %}
                 <td><strong>   {{ user.getTeam() }}   </strong> </td>
+                {% else %}
+                <td><strong>   {{ "--" }}   </strong> </td>
+                {% endif %}
                 <td><strong>   {{ user.position.title }}   </strong> </td>
                 <td><strong>   {{ user.rating }}   </strong> </td>
                 <td><strong>   {{ user.city }}   </strong> </td>                

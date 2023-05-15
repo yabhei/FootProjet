@@ -57,8 +57,8 @@
     font-size: 24px;
   }
 </style>
-
-        {% if app.user %}  
+  
+      {% if app.user %}  
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <ol>
                 <a href="{{ path('app_home') }}">Home</a>
@@ -78,19 +78,12 @@
                 
             </ol>
         </nav>
-        
-        
-        
-        
-         
-        
-        
-
-        {% else %}
+   
+    {% else %}
         <a href="{{ path('app_matches') }}">Matches</a>
         <a href="{{ path('app_login') }}">Login</a>
         <a href="{{ path('app_register') }}">Register</a>
-        {% endif %}
+    {% endif %}
 
         {% if is_granted('ROLE_ADMIN') %}
 
@@ -98,24 +91,27 @@
             
         {% endif %}
         
-       
-        {% block body %}{% endblock %}
+  {% block body %}
 
-
-        <footer>
+  <footer>
           
-          <div class="social-icons">
-            <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
-            <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
-          </div>
-          <div class="links">
-            <a href="#">About</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Contact Us</a>
-            <a href="#">Terms of Use</a>
-          </div>
-        </footer>
+    <div class="social-icons">
+      <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+    </div>
+    <div class="links">
+      <a href="#">About</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Terms of Use</a>
+    </div>
+  </footer>
+  
+  {% endblock %}      
+      
+
+  
  
         <!-- Footer -->
  {# <footer class="bg-dark text-center text-white" style="margin-bottom: 0%; margin-top: 28%;" > 
