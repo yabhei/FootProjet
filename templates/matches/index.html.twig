@@ -69,7 +69,7 @@
           {% if match.getDateMatch()|date("d/m/Y") < today and match.resultTeam1 is not null and match.resultTeam2 is not null %}
             
               
-            <li>{{ match.team1 }} <div class="match-result"> {{ match.resultTeam1 }} {{ ":" }} {{ match.resultTeam2 }}</div>  {{ match.team2 }} 
+            <li>{{ match.mTeam1 }} <div class="match-result"> {{ match.resultTeam1 }} {{ ":" }} {{ match.resultTeam2 }}</div>  {{ match.mTeam2 }} 
               {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")" }}</li>
               
           {% endif %}
@@ -85,7 +85,7 @@
         <ul>
           {% for match in matches %}
           {% if match.getDateMatch()|date("d/m/Y") >= today %}
-          <li>{{ match.team1 }} {{ "VS."}} {{ match.team2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")"
+          <li>{{ match.mTeam1 }} {{ "VS."}} {{ match.mTeam2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")"
             }}</li>
             {% set x = x + 1 %}
           {% endif %}
@@ -97,43 +97,32 @@
         </ul>
       </div>
 
-      {# {% for match in matches %}
-      {% if match.getDateMatch()|date("d/m/Y") < today %} 
-        {% if match.resultTeam1 is null and match.resultTeam2 is null %}
-        <div id="waiting-matches">
+
+      <div class="waiting-match">
         <h2>Waiting Results :</h2>
-        <ul>
-          {% for match in matches %}
-          {% if match.resultTeam1 is null and match.resultTeam2 is null %}
-          <li>{{ match.team1 }} {{ "VS."}} {{ match.team2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")"
-            }} <a href="{{ path('update_match', {'id' : match.id}) }}" class="btn btn-primary">Set result</a> </li>
-          {% endif %}
-          {% endfor %}
-        </ul>
-        </div>
-        {% endif %}
-        {% endif %}
-        {% endfor %} #}
-
-
         {% for match in matches %}
         {% if match.getDateMatch()|date("d/m/Y") < today %} 
-        {% if match.resultTeam1 is null and match.resultTeam2 is null %}
-          <div class="waiting-match">
-          <h2>Waiting Results :</h2>
+        {% if match.resultTeam1 is null or match.resultTeam2 is null %} 
           <ul>
-            {% for match in matches %}
-            {% if match.getDateMatch()|date("d/m/Y") < today and match.resultTeam1 is null and match.resultTeam2 is null %}
-            <li>{{ match.team1 }} {{ "VS."}} {{ match.team2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")"
-              }} <a href="{{ path('update_match', {'id' : match.id}) }}" class="btn btn-primary">Set result</a> </li>
-            {% endif %}
-            {% endfor %}
+            {# {% for match in matches %} #}
+            {# {% if match.getDateMatch()|date("d/m/Y") < today and match.resultTeam1 is null and match.resultTeam2 is null %} #}
+            <li style="display: inline-block;">{{ match.mTeam1 }} {{ "VS."}} {{ match.mTeam2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")"
+              }}</li>
+              {% if app.user and app.user == match.mTeam1.captain or app.user and app.user == match.mTeam2.captain %}
+                
+              <a href="{{ path('update_match', {'id' : match.id}) }}" class="btn btn-primary">Set result</a> 
+              {% endif %}
+              
+              
+            {# {% endif %} #}
+            {# {% endfor %} #}
           </ul>
-          </div>
+          
           {% endif %}
           {% endif %}
           {% endfor %}
-
+        </div>
+          {# {% endif %} #}
    
 </div>
 {% endblock %}

@@ -45,12 +45,20 @@ class Team
     #[ORM\ManyToMany(targetEntity: Matches::class)]
     private Collection $matches;
 
+    #[ORM\ManyToMany(targetEntity: Matches::class, mappedBy: 'mTeam1')]
+    private Collection $matchesN;
+
+    #[ORM\OneToMany(mappedBy: 'teamN1', targetEntity: MatchesN::class)]
+    private Collection $matchesNs;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->creationDate = new \DateTime();
         $this->matches = new ArrayCollection();
+        $this->matchesN = new ArrayCollection();
+        $this->matchesNs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -194,27 +202,62 @@ class Team
         return $this;
     }
 
+    // /**
+    //  * @return Collection<int, Matches>
+    //  */
+    // public function getMatches(): Collection
+    // {
+    //     return $this->matches;
+    // }
+
+    // public function addMatch(Matches $match): self
+    // {
+    //     if (!$this->matches->contains($match)) {
+    //         $this->matches->add($match);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeMatch(Matches $match): self
+    // {
+    //     $this->matches->removeElement($match);
+
+    //     return $this;
+    // }
+
     /**
      * @return Collection<int, Matches>
      */
-    public function getMatches(): Collection
+    public function getMatchesN(): Collection
     {
-        return $this->matches;
+        return $this->matchesN;
     }
 
-    public function addMatch(Matches $match): self
+    public function addMatchesN(Matches $matchesN): self
     {
-        if (!$this->matches->contains($match)) {
-            $this->matches->add($match);
+        if (!$this->matchesN->contains($matchesN)) {
+            $this->matchesN->add($matchesN);
+            $matchesN->addMTeam1($this);
         }
 
         return $this;
     }
 
-    public function removeMatch(Matches $match): self
+    public function removeMatchesN(Matches $matchesN): self
     {
-        $this->matches->removeElement($match);
+        if ($this->matchesN->removeElement($matchesN)) {
+            $matchesN->removeMTeam1($this);
+        }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, MatchesN>
+     */
+    public function getMatchesNs(): Collection
+    {
+        return $this->matchesNs;
     }
 }

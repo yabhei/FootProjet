@@ -18,12 +18,12 @@ class MatchesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('team1', EntityType::class,[
+            ->add('mTeam1', EntityType::class,[
                 'class' => Team::class,
                 'choice_label'=>'name',
                 //'mapped' => false,
             ])
-            ->add('team2', EntityType::class,[
+            ->add('mTeam2', EntityType::class,[
                 'class' => Team::class,
                 'choice_label'=>'name',
                 //'mapped' => false,

@@ -1,9 +1,9 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %} Hello HomeController!{% endblock %}
+{% block title %} Home Page {% endblock %}
 
 {% block body %}
 
-    <h1>    Hi {{app.user.firstname}}    </h1>
+    <h1>    Hi {{app.user.firstname}} {{ app.user.lastname }}    </h1>
 {% endblock %}
