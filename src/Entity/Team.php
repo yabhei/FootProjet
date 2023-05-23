@@ -227,14 +227,14 @@ class Team
     // }
 
     /**
-     * @return Collection<int, Matches>
+     * @return Collection<int, MatchesN>
      */
     public function getMatchesN(): Collection
     {
         return $this->matchesN;
     }
 
-    public function addMatchesN(Matches $matchesN): self
+    public function addMatchesN(MatchesN $matchesN): self
     {
         if (!$this->matchesN->contains($matchesN)) {
             $this->matchesN->add($matchesN);
@@ -244,7 +244,7 @@ class Team
         return $this;
     }
 
-    public function removeMatchesN(Matches $matchesN): self
+    public function removeMatchesN(MatchesN $matchesN): self
     {
         if ($this->matchesN->removeElement($matchesN)) {
             $matchesN->removeMTeam1($this);

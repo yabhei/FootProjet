@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %} Matches{% endblock %}
 
@@ -104,9 +104,7 @@
         {% if match.getDateMatch()|date("d/m/Y") < today %} 
         {% if match.resultTeam1 is null or match.resultTeam2 is null %} 
           <ul>
-            {# {% for match in matches %} #}
-            {# {% if match.getDateMatch()|date("d/m/Y") < today and match.resultTeam1 is null and match.resultTeam2 is null %} #}
-            <li style="display: inline-block;">{{ match.mTeam1 }} {{ "VS."}} {{ match.mTeam2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")"
+           <li style="display: inline-block;">{{ match.mTeam1 }} {{ "VS."}} {{ match.mTeam2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")"
               }}</li>
               {% if app.user and app.user == match.mTeam1.captain or app.user and app.user == match.mTeam2.captain %}
                 
@@ -114,15 +112,14 @@
               {% endif %}
               
               
-            {# {% endif %} #}
-            {# {% endfor %} #}
+          
           </ul>
           
           {% endif %}
           {% endif %}
           {% endfor %}
         </div>
-          {# {% endif %} #}
+          
    
 </div>
-{% endblock %}
+{% endblock %} #}
