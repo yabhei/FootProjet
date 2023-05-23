@@ -6,12 +6,13 @@ use App\Entity\User;
 
 use Symfony\Component\Form\AbstractType;
 use Doctrine\DBAL\Types\DateImmutableType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -28,6 +29,11 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('firstname',TextType::class)
             ->add('lastname',TextType::class)
+            ->add('email',EmailType::class, [
+                'constraints' => [
+                    new Email(['mode' => 'strict']),
+                ],
+            ])
             ->add('nTel',TelType::class)
             ->add('rating',NumberType::class, [
                 'html5' => true,
@@ -42,7 +48,7 @@ class RegistrationFormType extends AbstractType
                 
             ])
             ->add('city',TextType::class)
-            ->add('email',EmailType::class)
+            
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

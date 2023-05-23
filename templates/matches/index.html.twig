@@ -26,6 +26,21 @@
     padding: 10px;
     float: left; /* Switch float to left */
     width: 47%;
+    margin-bottom: 10px;
+  }
+
+  .waiting-match {
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: darkslategray;
+    color: white;
+    border: 1px solid black;
+    padding: 10px;
+    width: 47%;
+    margin-top: 10px;
+    float: left; /* Switch float to left */
   }
 
   .match-result {
@@ -51,32 +66,73 @@
         <ul>
           {% for match in matches %}
 
-          {% if match.getDateMatch()|date("d/m/Y") < today %}
+          {% if match.getDateMatch()|date("d/m/Y") < today and match.resultTeam1 is not null and match.resultTeam2 is not null %}
             
-         
-          <li>{{ match.team1 }} <div class="match-result"> {{ match.result1 }} {{ ":" }} {{ match.result2 }}</div>  {{ match.team2 }} 
-          {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")" }}</li>
-
+              
+            <li>{{ match.team1 }} <div class="match-result"> {{ match.resultTeam1 }} {{ ":" }} {{ match.resultTeam2 }}</div>  {{ match.team2 }} 
+              {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")" }}</li>
+              
           {% endif %}
 
           {% endfor %}
         </ul>
       </div>
+ 
     
       <div id="upcoming-matches">
+        {% set x = 0 %}
         <h2>Upcoming Matches :</h2>
         <ul>
           {% for match in matches %}
           {% if match.getDateMatch()|date("d/m/Y") >= today %}
-          <li>{{ match.team1 }}  {{ "VS."}}  {{ match.team2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")" }}</li>
+          <li>{{ match.team1 }} {{ "VS."}} {{ match.team2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")"
+            }}</li>
+            {% set x = x + 1 %}
           {% endif %}
           {% endfor %}
-
+          {% if x == 0 %}
+            <h4>{{ "There are no upcoming matches!" }}</h4>
+          {% endif %}
+      
         </ul>
       </div>
 
+      {# {% for match in matches %}
+      {% if match.getDateMatch()|date("d/m/Y") < today %} 
+        {% if match.resultTeam1 is null and match.resultTeam2 is null %}
+        <div id="waiting-matches">
+        <h2>Waiting Results :</h2>
+        <ul>
+          {% for match in matches %}
+          {% if match.resultTeam1 is null and match.resultTeam2 is null %}
+          <li>{{ match.team1 }} {{ "VS."}} {{ match.team2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")"
+            }} <a href="{{ path('update_match', {'id' : match.id}) }}" class="btn btn-primary">Set result</a> </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endfor %} #}
 
 
+        {% for match in matches %}
+        {% if match.getDateMatch()|date("d/m/Y") < today %} 
+        {% if match.resultTeam1 is null and match.resultTeam2 is null %}
+          <div class="waiting-match">
+          <h2>Waiting Results :</h2>
+          <ul>
+            {% for match in matches %}
+            {% if match.getDateMatch()|date("d/m/Y") < today and match.resultTeam1 is null and match.resultTeam2 is null %}
+            <li>{{ match.team1 }} {{ "VS."}} {{ match.team2 }} {{"-"}} {{"("}} {{ match.getDateMatch()|date("d/m/Y") }} {{ ")"
+              }} <a href="{{ path('update_match', {'id' : match.id}) }}" class="btn btn-primary">Set result</a> </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+          </div>
+          {% endif %}
+          {% endif %}
+          {% endfor %}
 
    
 </div>

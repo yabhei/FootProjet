@@ -54,6 +54,16 @@ class MatchesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+// public function Update($id, $colname, $value): array
+//    {
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.'.$id.' = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
+
 //    public function findOneBySomeField($value): ?Matches
 //    {
 //        return $this->createQueryBuilder('m')

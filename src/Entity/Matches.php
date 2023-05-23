@@ -22,14 +22,14 @@ class Matches
     #[ORM\Column(length: 70)]
     private ?string $team2 = null;
 
-    #[ORM\Column]
-    private ?int $result1 = null;
-
-    #[ORM\Column]
-    private ?int $result2 = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?DateTimeInterface $date_match = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $resultTeam1 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $resultTeam2 = null;
 
 
     public function __construct()
@@ -69,30 +69,6 @@ class Matches
         return $this;
     }
 
-    public function getResult1(): ?int
-    {
-        return $this->result1;
-    }
-
-    public function setResult1(int $result1): self
-    {
-        $this->result1 = $result1;
-
-        return $this;
-    }
-
-    public function getResult2(): ?int
-    {
-        return $this->result2;
-    }
-
-    public function setResult2(int $result2): self
-    {
-        $this->result2 = $result2;
-
-        return $this;
-    }
-
     public function getDateMatch(): ?DateTimeInterface
     {
         return $this->date_match;
@@ -101,6 +77,30 @@ class Matches
     public function setDateMatch(DateTimeInterface $date_match): self
     {
         $this->date_match = $date_match;
+
+        return $this;
+    }
+
+    public function getResultTeam1(): ?int
+    {
+        return $this->resultTeam1;
+    }
+
+    public function setResultTeam1(?int $resultTeam1): self
+    {
+        $this->resultTeam1 = $resultTeam1;
+
+        return $this;
+    }
+
+    public function getResultTeam2(): ?int
+    {
+        return $this->resultTeam2;
+    }
+
+    public function setResultTeam2(?int $resultTeam2): self
+    {
+        $this->resultTeam2 = $resultTeam2;
 
         return $this;
     }
