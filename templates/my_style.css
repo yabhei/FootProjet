@@ -1,6 +1,6 @@
-thead{
+/* thead{
     background-color: cadetblue;
-}
+} */
 
 .match{
     background-color: cadetblue;
@@ -21,4 +21,9 @@ thead{
         min-height: 128px;
         width: 100%;
     
+}
+
+#list_table{
+    border-radius: 5%;
+    margin: 4%;
 }

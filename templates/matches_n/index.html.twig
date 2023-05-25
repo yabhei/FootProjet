@@ -5,121 +5,169 @@
 {% block body %}
 
 <style>
-  /* Add some basic styling */
-  #finished-matches {
-    border-radius: 10px;
-    padding: 3%;
-    background-color: darkslategray;
-    color: white;
-    border: 1px solid black;
-    padding: 10px;
-    float: right; /* Switch float to right */
-    width: 47%;
-  }
+    /* Add some basic styling */
+    .finished-matches {
+        border-radius: 10px;
+        padding: 3%;
+        background-color: darkslategray;
+        color: white;
+        border: 1px solid black;
+        padding: 10px;
+        float: right;
+        /* Switch float to right */
+        width: 47%;
+    }
 
-  #upcoming-matches {
-    border-radius: 10px;
-    padding: 3%;
-    background-color: darkslategray;
-    color: white;
-    border: 1px solid black;
-    padding: 10px;
-    float: left; /* Switch float to left */
-    width: 47%;
-    margin-bottom: 10px;
-  }
+    .upcoming-matches {
+        border-radius: 10px;
+        padding: 3%;
+        background-color: darkslategray;
+        color: white;
+        border: 1px solid black;
+        padding: 10px;
+        float: left;
+        /* Switch float to left */
+        width: 47%;
+        margin-bottom: 10px;
+    }
 
-  .waiting-match {
-    display: flexbox;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    background-color: darkslategray;
-    color: white;
-    border: 1px solid black;
-    padding: 10px;
-    width: 47%;
-    margin-top: 10px;
-    float: left; /* Switch float to left */
-  }
+    .waiting-match {
+        display: flexbox;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        background-color: darkslategray;
+        color: white;
+        border: 1px solid black;
+        padding: 10px;
+        width: 47%;
+        margin-top: 10px;
+        float: left;
+        /* Switch float to left */
+    }
 
-  .match-result {
-    display: inline-block;
-    width: fit-content;
-    background-color: #eaeaea;
-    border-radius: 5px;
-    color: #333;
-    font-size: 12px;
-    padding: 3px 5px;
-  } 
+    .match-result {
+        display: inline-block;
+        width: fit-content;
+        background-color: #eaeaea;
+        border-radius: 5px;
+        color: #333;
+        font-size: 12px;
+        padding: 3px 5px;
+    }
+
+
+
+    .two_table {
+        display: flexbox;
+        justify-content: center;
+    }
+
+    .wait_table {
+        display: flexbox;
+        justify-content: start;
+        
+
+    }
+
+    .main_div{
+        display: grid;
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+         "two_table"
+         "wait_table";
+    }
+
+    .two_table{
+        grid-area: two_table;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: "upcoming-matches finished-matches ";
+    }
+
+    .wait_table{
+        grid-area: wait_table;
+        margin-left: 3%;
+
+    }
+
 
 </style>
 
 {% set today = "now"|date("d-m-Y") %}
+<div class="main_div">
 
-<div style=" margin: 3%;">
-   
+    <div style=" margin: 3%;" class="two_table">
 
-      <div id="finished-matches">
-        <h2>Finished Matches :</h2>
-       
-        <ul>
-          {% for match in matches %}
 
-          {% if match.getMatchDate()|date("d/m/Y") < today and match.teamResult1 is not null and match.teamResult2 is not null %}
-            
-              
-            <li>{{ match.teamN1 }} <div class="match-result"> {{ match.teamResult1 }} {{ ":" }} {{ match.teamResult2 }}</div>  {{ match.teamN2 }} 
-              {{"("}} {{ match.getMatchDate()|date("d/m/Y") }} {{ ")" }}</li>
-              
-          {% endif %}
+        <div class="finished-matches">
+            <h2>Finished Matches :</h2>
 
-          {% endfor %}
+            <ul>
+                {% for match in matches %}
+
+                {% if match.getMatchDate()|date("d/m/Y") < today and match.teamResult1 is not null and match.teamResult2
+                    is not null %} <div
+                    style="background-color: rgb(64, 160, 8); border-radius: 10px; width: fit-content; ">
+                    <li >{{ match.teamN1 }} <div class="match-result"> {{ match.teamResult1 }} {{ ":" }} {{
+                            match.teamResult2 }}</div> {{ match.teamN2 }}
+                        {{"("}} {{ match.getMatchDate()|date("d/m/Y") }} {{ ")" }}</li>
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
         </ul>
-      </div>
- 
-    
-      <div id="upcoming-matches">
+    </div>
+
+
+    <div class="upcoming-matches">
         {% set x = 0 %}
         <h2>Upcoming Matches :</h2>
         <ul>
-          {% for match in matches %}
-          {% if match.getMatchDate()|date("d/m/Y") >= today %}
-          <li>{{ match.teamN1 }} {{ "VS."}} {{ match.teamN2 }} {{"-"}} {{"("}} {{ match.getMatchDate()|date("d/m/Y") }} {{ ")"
-            }}</li>
+            {% for match in matches %}
+            {% if match.getMatchDate()|date("d/m/Y") >= today %}
+            <div style="background-color: crimson; width: fit-content; border-radius: 10px;">
+                <li>{{ match.teamN1 }} {{ "VS."}} {{ match.teamN2 }} {{"-"}} {{"("}} {{
+                    match.getMatchDate()|date("d/m/Y")
+                    }} {{ ")"
+                    }}</li>
+            </div>
             {% set x = x + 1 %}
-          {% endif %}
-          {% endfor %}
-          {% if x == 0 %}
+            {% endif %}
+            {% endfor %}
+            {% if x == 0 %}
             <h4>{{ "There are no upcoming matches!" }}</h4>
-          {% endif %}
-      
+            {% endif %}
+
         </ul>
-      </div>
+    </div>
 
+</div>
 
-      <div class="waiting-match">
+<div class="wait_table">
+    <div class="waiting-match">
         <h2>Waiting Results :</h2>
         {% for match in matches %}
-        {% if match.getMatchDate()|date("d/m/Y") < today %} 
-        {% if match.teamResult1 is null or match.teamResult2 is null %} 
-          <ul>
-           <li style="display: inline-block;">{{ match.teamN1 }} {{ "VS."}} {{ match.teamN2 }} {{"-"}} {{"("}} {{ match.getMatchDate()|date("d/m/Y") }} {{ ")"
-              }}</li>
-              {% if (app.user and app.user == match.teamN1.captain) or (app.user and app.user == match.teamN2.captain) or (app.user and is_granted('ROLE_ADMIN')) %}
-                
-              <a href="{{ path('update_match', {'id' : match.id}) }}" class="btn btn-primary">Set result</a> 
-              {% endif %}
-              
-              
-          
-          </ul>
-          
-          {% endif %}
-          {% endif %}
-          {% endfor %}
-        </div>
-          
-   
+        {% if match.getMatchDate()|date("d/m/Y") < today %} {% if match.teamResult1 is null or match.teamResult2 is null
+            %} <ul>
+            <li style="display: inline-block;">{{ match.teamN1 }} {{ "VS."}} {{ match.teamN2 }} {{"-"}} {{"("}} {{
+                match.getMatchDate()|date("d/m/Y") }} {{ ")"
+                }}</li>
+            {% if (app.user and app.user == match.teamN1.captain) or (app.user and app.user == match.teamN2.captain) or
+            (app.user and is_granted('ROLE_ADMIN')) %}
+
+            <a href="{{ path('update_match', {'id' : match.id}) }}" class="btn btn-primary">Set result</a>
+            {% endif %}
+
+
+
+            </ul>
+
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+    </div>
+</div>
 </div>
 {% endblock %}

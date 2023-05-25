@@ -16,37 +16,37 @@ class MatchesNType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        
+
         $builder
 
-        
-        ->add('teamN1', EntityType::class,[
-            'class' => Team::class,
-            'choice_label'=>'name',
-           
-        ])
-        ->add('teamN2', EntityType::class,[
-            'class' => Team::class,
-            'choice_label'=>'name',
-           
-        ])
-            ->add('teamResult1',NumberType::class, [
-                'html5' => true,
-                'required' => false,
-                'attr' => [
-                    
-                    'min' => 0,
-                
-                ] 
+
+            ->add('teamN1', EntityType::class, [
+                'class' => Team::class,
+                'choice_label' => 'name',
+
             ])
-            ->add('teamResult2',NumberType::class, [
+            ->add('teamN2', EntityType::class, [
+                'class' => Team::class,
+                'choice_label' => 'name',
+
+            ])
+            ->add('teamResult1', NumberType::class, [
                 'html5' => true,
                 'required' => false,
                 'attr' => [
-                    
+
                     'min' => 0,
-                
-                ] 
+
+                ]
+            ])
+            ->add('teamResult2', NumberType::class, [
+                'html5' => true,
+                'required' => false,
+                'attr' => [
+
+                    'min' => 0,
+
+                ]
             ])
             ->add('matchDate', DateType::class, [
                 'widget' => 'single_text'

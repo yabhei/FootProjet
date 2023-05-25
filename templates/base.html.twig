@@ -21,23 +21,53 @@
   {% block javascripts %}
   {{ encore_entry_script_tags('app') }}
   {% endblock %}
-</head>
 
-<body>
   <style>
 
-    body{
-      background-color: black;
-      color: white;
+    header {
+      background-color: #000008;
+      padding: 20px;
     }
 
-    footer {
-      background-color: black;
-      color: white;
-      height: 70px;
-      position: absolute;
+    
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+nav li:last-child {
+  margin-right: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #f5f0f0;
+  font-weight: bold;
+}
+
+.site-name {
+  font-size: 24px;
+  color: #e7e1e1;
+  font-weight: bold;
+}
+
+    
+  
+
+    .footer_style {
+      background-color: rgb(22, 2, 2);
+      color: rgb(10, 1, 1);
+      height: 40px;
+      
       bottom: 0;
       width: 100%;
+      margin-bottom: 0%;
     }
 
     .links {
@@ -66,10 +96,32 @@
       margin: 0 10px;
       font-size: 24px;
     }
+
+    .container_body {
+      background-image: url('https://e0.pxfuel.com/wallpapers/25/944/desktop-wallpaper-santiago-bernabeu-stadium-background-cool.jpg');
+      background-size: cover;
+      /*filter: blur(6px);*/
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh; /* Adjust the height as needed */
+      color: white;
+    }
+
+    .navbar_edit{
+      background-color: rgba(7, 31, 58, 0.34);
+    }
+
   </style>
 
+</head>
+
+<body>
+  
+  <header>
+    
+    <a href="{{ path('app_home') }}"><img src="templates\imgs\Capture d'écran 2023-05-15 103713.png" alt="PLAYAB.COM"></a>
   {% if app.user %}
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav >
     <ol>
       <a href="{{ path('app_home') }}">Home</a>
       <a href="{{ path('my_details',{'id':app.user.id}) }}">My profile</a>
@@ -94,7 +146,9 @@
   <a href="{{ path('app_login') }}">Login</a>
   <a href="{{ path('app_register') }}">Register</a>
   {% endif %}
+</header>
 
+<div class="container_body">
   {% if is_granted('ROLE_ADMIN') %}
 
 
@@ -103,25 +157,27 @@
 
   {% block body %}
 
-  <footer>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
-      <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
-      <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
-    </div>
-    <div class="links">
-      <a href="#">About</a>
-      <a href="#">Privacy Policy</a>
-      <a href="#">Contact Us</a>
-      <a href="#">Terms of Use</a>
-    </div>
-  </footer>
 
   {% endblock %}
 
+</div>
 
+{% block footer %}
+<footer class="footer_style">
 
+  <div class="social-icons">
+    <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+    <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+  </div>
+  <div class="links">
+    <a href="#">About</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Contact Us</a>
+    <a href="#">Terms of Use</a>
+  </div>
+</footer>
+{% endblock %}
 
   <!-- Footer -->
   {# <footer class="bg-dark text-center text-white" style="margin-bottom: 0%; margin-top: 28%;">
