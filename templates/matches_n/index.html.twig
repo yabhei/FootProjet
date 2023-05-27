@@ -20,7 +20,7 @@
 
                 {% if match.getMatchDate()|date("d/m/Y") < today and match.teamResult1 is not null and match.teamResult2
                     is not null %} <div
-                    style="background-color: rgb(64, 160, 8); border-radius: 10px; width: fit-content; ">
+                    style="background-color: rgb(64, 160, 8); border-radius: 5px; width: fit-content; ">
                     <li >{{ match.teamN1 }} <div class="match-result"> {{ match.teamResult1 }} {{ ":" }} {{
                             match.teamResult2 }}</div> {{ match.teamN2 }}
                         {{"("}} {{ match.getMatchDate()|date("d/m/Y") }} {{ ")" }}</li>

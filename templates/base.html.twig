@@ -53,7 +53,7 @@
   </nav>
 
   {% else %}
-  <a href="{{ path('app_matches') }}">Matches</a>
+  {# <a href="{{ path('app_matches') }}">Matches</a> #}
   <a href="{{ path('app_login') }}">Login</a>
   <a href="{{ path('app_register') }}">Register</a>
   {% endif %}
@@ -75,12 +75,13 @@
 
 
 {% block footer %}
-<footer class="footer_style">
+<div class="footer_style">
 
   <div class="social-icons">
     <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
     <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
     <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+
   </div>
   <div class="links">
     <a href="#">About</a>
@@ -88,7 +89,7 @@
     <a href="#">Contact Us</a>
     <a href="#">Terms of Use</a>
   </div>
-</footer>
+</div>
 {% endblock %}
 
 
