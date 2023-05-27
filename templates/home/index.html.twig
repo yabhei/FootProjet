@@ -4,6 +4,13 @@
 {% block title %} Home Page {% endblock %}
 
 {% block body %}
-
+    {% if app.user %}
+        
     <h1>    Hi {{app.user.firstname}} {{ app.user.lastname }}    </h1>
+    {% else %}
+    <div style=" display: flex; justify-content: center;">
+
+        <h1 style="background-color: chocolate; width: fit-content;"> Pleas sign in  </h1>
+    </div>
+    {% endif %}
 {% endblock %}

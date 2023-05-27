@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Service\Filter;
+use App\Form\SearchFormType;
 use Doctrine\Persistence\ManagerRegistry;
+use Proxies\__CG__\App\Entity\Position;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,12 +15,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     #[Route('/user', name: 'app_user')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $doctrine, Request $request): Response
     {
+
+        $filter = new Filter();
         $users = $doctrine->getRepository(User::class) ->findAll();
+
+        $form = $this->createForm(SearchFormType::class, $filter);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $filter = $doctrine->getRepository(Position::class)->SearchPosition();
+            // dd($filter);
+
+
+        }
         
         return $this->render('user/index.html.twig', [
-            'users'=>$users
+            'users'=>$users,
+            'form' => $form->createView(),
+            
         
         ]);
     }

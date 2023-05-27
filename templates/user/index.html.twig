@@ -4,7 +4,7 @@
 
 {% block body %}
 <style>
-#list_table{
+/*#list_table{ 
     border-radius: 10px;
 }
 
@@ -17,16 +17,22 @@
     
     border-radius: 10px;
     
-}
+}*/
 </style>
 
 <div id="list_table" >
     <div>
         <h1 style="display: inline-block;">List of players</h1>
+
+        {# {{ form_start(form) }} #}
+        {# {{ form_row(form.search) }}
+        {{ form_widget(form) }} #}
+        {# {{ form_end(form) }} #}
         <div class="search">
             <input type="text" placeholder="Search" class="search_box">
+
         </div>
-    </div>
+    </div> 
 <table class="table table-dark table-hover" >
     <thead> 
         <tr>    
