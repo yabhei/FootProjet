@@ -24,13 +24,6 @@ class UserController extends AbstractController
         $form = $this->createForm(SearchFormType::class, $filter);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // $filter = $doctrine->getRepository(Position::class)->SearchPosition();
-            // dd($filter);
-
-
-        }
-        
         return $this->render('user/index.html.twig', [
             'users'=>$users,
             'form' => $form->createView(),
@@ -38,6 +31,13 @@ class UserController extends AbstractController
         
         ]);
     }
+
+    // if ($form->isSubmitted() && $form->isValid()) {
+        // $filter = $doctrine->getRepository(Position::class)->SearchPosition();
+        // dd($filter);
+
+
+    // }
 
 
     #[Route('/user/list', name: 'list_user')]
