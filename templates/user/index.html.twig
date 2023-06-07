@@ -1,38 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PlayerController!{% endblock %}
+{% block title %}
+<script src="{{ asset('js/search.js') }}"></script>
+Hello PlayerController!
+{% endblock %}
 
-{% block body %}
-<style>
-/*#list_table{ 
-    border-radius: 10px;
-}
 
-.search{
-    float: right;
-    border-radius: 10px;
-}
 
-.search_box{
-    
-    border-radius: 10px;
-    
-}*/
-</style>
 
-<div id="list_table" >
-    <div>
-        <h1 style="display: inline-block;">List of players</h1>
 
-        {# {{ form_start(form) }} #}
-        {# {{ form_row(form.search) }}
-        {{ form_widget(form) }} #}
-        {# {{ form_end(form) }} #}
-        <div class="search">
-            <input type="text" placeholder="Search" class="search_box">
-
-        </div>
+{# templates/user/index.html.twig
+    {{ form_start(searchForm, { 'attr': { 'id': 'search-form' } }) }}
+    {{ form_row(searchForm.position) }}
+    <button type="submit">Search</button>
+    {{ form_end(searchForm) }} #}
+    {% block body %}
+    <div id="list_table" >
+<div>
+    <h1 style="display: inline-block;" class="list-players">List of players</h1>
     </div> 
+    {# {{ form_start(form) }}
+    {{ form_row(form.position) }}
+    {{ form_row(form.search) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }} #}
+    <div class="search">
+        {# <select name="position" id="positions">
+        {% for position in positions %}
+        <option value="{{ position.title }}">{{ position.title }}</option>
+        {% endfor %} #}
+    {# </select> #}
+        {# <input type="text" placeholder="Search By position" class="search_box"> #}
+        {# <input type="submit" class="btn btn-primary" value="Search"> #}
+        <a href="{{ path('search_user') }}" class="btn btn-primary">Search</a>
+        
+    </div>
 <table class="table table-dark table-hover" >
     <thead> 
         <tr>    
@@ -43,6 +45,7 @@
     </thead>
     <tbody>
         {% for user in users %}
+       
 
         <tr>
             <td><strong> <a href="{{path('details_user', {'id' : user.id})}}"> {{ user.firstname}} {{user.lastname }}

@@ -59,17 +59,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
    /**
     * @return User[] Returns an array of User objects
     */
-   public function SearchByPosition($positionValue): array
+   public function SearchByPosition($positionValue)
    {
-       $query = $this->createQueryBuilder('u')
-
-           ->select('u')
-           ->andWhere('u.position_id = :PositionVal')
-           ->setParameter('PositionVal', $positionValue)
-           ->orderBy('u.id', 'ASC')
-           ->getQuery()
-           ->getResult()
-       ;
+        
+        return   $this->createQueryBuilder('u')
+                      ->andWhere('u.position = :PositionVal')
+                      ->setParameter('PositionVal', $positionValue)
+                      ->orderBy('u.id', 'ASC')
+                      ->getQuery()
+                      ->getResult();
+      
    }
 
 //                 ->innerJoin('u.position_id', 'p.id')

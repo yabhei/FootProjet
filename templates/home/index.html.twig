@@ -5,12 +5,14 @@
 
 {% block body %}
     {% if app.user %}
-        
-    <h1>    Hi {{app.user.firstname}} {{ app.user.lastname }}    </h1>
+    <div style="display: flex; justify-content: center;">
+
+        <h1 style="width: fit-content;">    Hi {{app.user.firstname}} {{ app.user.lastname }}    </h1>
+    </div>
     {% else %}
     <div style=" display: flex; justify-content: center;">
 
-        <h1 style="background-color: rgb(39, 11, 199); width: fit-content;">Already member? Pleas <a href="{{ path('app_login') }}"> Sign in </a> <br> OR <a href="{{ path('app_register') }}"> Sign up </a> to be the new <strong> GOAT </strong> </h1>
+        <h4 style="background-color: rgb(184, 11, 11); width: fit-content;">Already member? Pleas <a href="{{ path('app_login') }}"> Sign in </a> <br> OR <a href="{{ path('app_register') }}"> Sign up </a> to be the new <strong> GOAT </strong> </h4>
     </div>
     {% endif %}
 {% endblock %}

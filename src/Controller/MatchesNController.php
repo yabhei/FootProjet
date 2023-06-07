@@ -9,6 +9,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MatchesNController extends AbstractController
@@ -26,8 +28,16 @@ class MatchesNController extends AbstractController
 
     #[Route('/match', name: 'make_match')] // Defines a new route
     #[Route('/match/edit/{id}', name: 'update_match')]
-public function CreateMatch(EntityManagerInterface $em, Request $request, MatchesN $match = null): Response // Defines a function with two parameters, the first one is an instance of ManagerRegistry class and the second one is a Request object. It returns a Response object.
+public function CreateMatch(EntityManagerInterface $em, Request $request,CsrfTokenManagerInterface $csrfTokenManager, MatchesN $match = null): Response // Defines a function with two parameters, the first one is an instance of ManagerRegistry class and the second one is a Request object. It returns a Response object.
 {
+
+      // Récupérer le jeton CSRF envoyé avec la requête
+      $token = $request->request->get('_csrf_token');
+
+      // Vérifier le jeton CSRF
+    //   if (!$csrfTokenManager->isTokenValid(new CsrfToken('form_token', $token))) {
+    //       throw $this->createAccessDeniedException('Invalid CSRF token.');
+    //   }
 
     // Create a new Matches object
     

@@ -4,9 +4,11 @@ namespace App\Form;
 
 use App\Entity\User;
 
+use App\Entity\Position;
 use Symfony\Component\Form\AbstractType;
 use Doctrine\DBAL\Types\DateImmutableType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -18,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -34,6 +37,11 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Email(['mode' => 'strict']),
                 ],
+            ])
+            ->add('position', EntityType::class, [
+                'class' => Position::class,
+                'choice_label' => 'title',
+
             ])
             ->add('nTel',TelType::class)
             ->add('rating',NumberType::class, [
@@ -71,11 +79,16 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
-                        'message' => 'The password should contain at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.'
+                        'message' => 'The password should contain at least 8 characters, one uppercase letter, 
+                        one lowercase letter, one digit, and one special character.'
                     ])
-                ]
-            ])
-        ;
+                    ],
+                    'attr' => [
+                        'placeholder' => 'Enter password',
+                        'help' => 'Password should contain at least 8 characters, one uppercase letter, 
+                        one lowercase letter, one digit, and one special character.'
+                    ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

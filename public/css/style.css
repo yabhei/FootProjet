@@ -1,16 +1,43 @@
-/* thead{
-    background-color: cadetblue;
-} */
+/* ==================== Responsive ====================== */
+
+@media (max-width: 700px) { 
+ .list-players{
+  font-family: 'Courier New', Courier, monospace;
+ }
+ /* nav ul {
+  display: flex;
+  justify-content: baseline;
+ } */
+
+}
+
+/* ==================== Header ====================== */
+
 
 header {
+  position: relative;
+  background-image: url('../imgs/Capture d\'écran 2023-05-12 171356.png');
+  background-size: cover;
+  background-repeat: no-repeat;
   background-color: #000008;
   padding: 20px;
-  margin-bottom: 0%;
+  height: 175px;
+  width: 100%;
 }
 
-body {
-  background-color: #000008;
+.logo {
+  border-radius: 10px;
+  width: 300px;
 }
+
+.img_logo {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
 
 
 nav ul {
@@ -18,7 +45,13 @@ nav ul {
   margin: 0;
   padding: 0;
   display: flex;
+
 }
+
+/* .nav-top{
+display: flex;
+
+} */
 
 nav li {
   margin-right: 20px;
@@ -43,74 +76,45 @@ nav a {
 
 
 
-.footer_style {
-  position: fixed;
-  background-color: rgb(22, 2, 2);
-  color: rgb(10, 1, 1);
-  height: 10%;
-  bottom: 0;
+
+
+
+
+/* ==================== Body ====================== */
+
+
+body {
+  background-color: #000008;
   width: 100%;
-  /* margin-bottom: 0%; */
 }
 
-.links {
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-
+h1, h2, h3, h4{
+  background-color: #333;
+  border-radius: 7px;
+  font-family: serif;
+  
 }
 
-.links a {
-  color: white;
-  margin: 0 10px;
-  text-decoration: none;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.social-icons a {
-  margin: 0 10px;
-  font-size: 24px;
-}
 
 .container_body {
-  background-image: url('https://e0.pxfuel.com/wallpapers/25/944/desktop-wallpaper-santiago-bernabeu-stadium-background-cool.jpg');
+  background-image: url('https://wallpapers.com/images/high/santiago-bernabeu-stadium-football-field-dgygwpl7xvlvdybh.webp');
   background-size: cover;
   /*filter: blur(6px);*/
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 0%;
   height: 100vh; /*Adjust the height as needed */
-  color: white;
-
+  color: hsla(0, 23%, 92%, 0.932);
+  width: 100%;
 }
 
 .navbar_edit {
   background-color: rgba(7, 31, 58, 0.34);
 }
 
-.logo {
-  border-radius: 10px;
-}
-
-.img_logo {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-}
 
 
-.match {
-  background-color: cadetblue;
-  color: white;
-}
+
 
 .game-center-header_competitors_and_scores__0EHVn {
 
@@ -143,6 +147,19 @@ nav a {
   border-radius: 10px;
 
 }
+
+
+
+
+
+
+/* ==================== Matches ====================== */
+
+.match {
+  background-color: cadetblue;
+  color: white;
+}
+ 
 
 .finished-matches {
   border-radius: 10px;
@@ -225,4 +242,74 @@ nav a {
   grid-area: two_table;
   grid-template-columns: 50% 50%;
   grid-template-rows: "upcoming-matches finished-matches ";
+}
+
+
+
+
+
+
+
+
+/* ========================= Form ============================*/
+.my-form {
+  background-color: #1a0202;
+  }
+
+
+
+
+
+
+
+
+/* ========================= Footer ============================*/
+
+
+.footer{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-top: 5%;
+
+}
+
+.footer_style {
+  position: absolute;
+  background-color: rgb(22, 2, 2);
+  color: rgb(10, 1, 1);
+  height: 10%;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  /* margin-bottom: 0%; */
+}
+
+.links {
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+}
+
+.links a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  font-size: 24px;
 }

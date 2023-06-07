@@ -2,6 +2,6 @@ controllers:
     resource: ../src/Controller/
     type: attribute
 # config/routes.yaml
-search:
-    path: /search
-    controller: App\Controller\SearchController::search
+search_users:
+    path: /users/search
+    controller: App\Controller\UserController::search

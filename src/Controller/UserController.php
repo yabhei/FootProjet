@@ -4,41 +4,89 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Service\Filter;
+use App\Entity\Position;
 use App\Form\SearchFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Proxies\__CG__\App\Entity\Position;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
+
+    // private $entityManager;
+
+    // public function __construct(EntityManagerInterface $entityManager)
+    // {
+    //     $this->entityManager = $entityManager;
+    // }
+    
     #[Route('/user', name: 'app_user')]
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
+        //     $entityManager = $doctrine->getManager();
+        //     $positions = $entityManager->getRepository(Position::class)->findAll();
+        //     $players = [];
 
-        $filter = new Filter();
-        $users = $doctrine->getRepository(User::class) ->findAll();
+        //     $positionChoices = [];
+        //     foreach ($positions as $position) {
+        //         $positionChoices[$position->getTitle()] = $position;
+        //     }
 
-        $form = $this->createForm(SearchFormType::class, $filter);
-        $form->handleRequest($request);
+        //     $searchForm = $this->createForm(SearchType::class, null, [
+        //         'positions' => $positions,
+        //     ]);
+        //     $searchForm->get('position')->setChoices($positionChoices);
+
+        //     $searchForm->handleRequest($request);
+
+        //     if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+        //         $position = $searchForm->getData()['position'];
+        //         $players = $entityManager->getRepository(User::class)->findBy(['position' => $position]);
+        //     } else {
+        //         $players = $entityManager->getRepository(User::class)->findAll();
+        //     }
+
+        //     return $this->render('user/index.html.twig', [
+        //         'searchForm' => $searchForm->createView(),
+        //         'players' => $players,
+        //     ]);
+        // }
+
+
+        // ...
+
+
+
+        // ...
+
+
+        // $filter = new Filter();
+        $users = $doctrine->getRepository(User::class)->findAll();
+        $positions = $doctrine->getRepository(Position::class)->findAll();
+        // $form = $this->createForm(SearchFormType::class, $filter);
+        // $form->handleRequest($request);
 
         return $this->render('user/index.html.twig', [
-            'users'=>$users,
-            'form' => $form->createView(),
-            
-        
+            'users' => $users,
+            'positions' => $positions,
+            // 'form' => $form->createView(),
+
+
         ]);
+
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $filter = $doctrine->getRepository(Position::class)->SearchPosition();
+        //     dd($filter);
+
+
+        // }
     }
-
-    // if ($form->isSubmitted() && $form->isValid()) {
-        // $filter = $doctrine->getRepository(Position::class)->SearchPosition();
-        // dd($filter);
-
-
-    // }
-
 
     #[Route('/user/list', name: 'list_user')]
     public function ListUsers(ManagerRegistry $doctrine): Response
@@ -90,5 +138,23 @@ class UserController extends AbstractController
         ]);
 
     }
+
+
+    // public function search(Request $request)
+    // {
+    //     $form = $this->createForm(SearchType::class);
+    //     $form->handleRequest($request);
+    
+    //     // Fetch all players initially
+    //     $players = $this->getDoctrine()->getRepository(User::class)->findAll();
+    
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $position = $form->getData()['position'];
+    //         // Fetch players based on the selected position
+    //         $players = $this->getDoctrine()->getRepository(User::class)->findBy(['position' => $position]);
+    //     }
+    
+    //     return new JsonResponse(['players' => $players]);
+    // }
 
 }
