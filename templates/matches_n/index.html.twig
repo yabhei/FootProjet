@@ -18,11 +18,11 @@
             <ul>
                 {% for match in matches %}
 
-                {% if match.getMatchDate()|date("d/m/Y") < today and match.teamResult1 is not null and match.teamResult2
-                    is not null %} <div
+                {% if match.getMatchDate()|date("d/m/Y") < date()|date("d/m/Y") and match.teamResult1 is not null and
+                    match.teamResult2 is not null %} <div
                     style="background-color: rgb(64, 160, 8); border-radius: 5px; width: fit-content; ">
-                    <li >{{ match.teamN1 }} <div class="match-result"> {{ match.teamResult1 }} {{ ":" }} {{
-                            match.teamResult2 }}</div> {{ match.teamN2 }}
+                    <li>{{ match.teamN1 }} <div class="match-result"> {{ match.teamResult1 }} {{ ":" }} {{
+                            match.teamResult2 }}</div> {{ match.teamN2 }} {{"-"}}
                         {{"("}} {{ match.getMatchDate()|date("d/m/Y") }} {{ ")" }}</li>
         </div>
 
@@ -36,9 +36,10 @@
     <div class="upcoming-matches">
         {% set x = 0 %}
         <h2>Upcoming Matches :</h2>
+        {# {{ dump(date()) }} #}
         <ul>
             {% for match in matches %}
-            {% if match.getMatchDate()|date("d/m/Y") >= today %}
+            {% if match.getMatchDate()|date("d/m/Y") > date()|date("d/m/Y") %}
             <div style="background-color: crimson; width: fit-content; border-radius: 10px;">
                 <li>{{ match.teamN1 }} {{ "VS."}} {{ match.teamN2 }} {{"-"}} {{"("}} {{
                     match.getMatchDate()|date("d/m/Y")
@@ -61,8 +62,8 @@
     <div class="waiting-match">
         <h2>Waiting Results :</h2>
         {% for match in matches %}
-        {% if match.getMatchDate()|date("d/m/Y") < today %} {% if match.teamResult1 is null or match.teamResult2 is null
-            %} <ul>
+        {% if match.getMatchDate()|date("d/m/Y") <= date()|date("d/m/Y") %} {% if match.teamResult1 is null or
+            match.teamResult2 is null %} <ul>
             <li style="display: inline-block;">{{ match.teamN1 }} {{ "VS."}} {{ match.teamN2 }} {{"-"}} {{"("}} {{
                 match.getMatchDate()|date("d/m/Y") }} {{ ")"
                 }}</li>

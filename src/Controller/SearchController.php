@@ -20,30 +20,32 @@ class SearchController extends AbstractController
         ]);
     }
 
-    
+
     #[Route('/search/byPosition', name: 'search_user')]
     public function searchByPosition(ManagerRegistry $doctrine, Request $request): Response
-{
-    $form = $this->createForm(SearchFormType::class, null);
-    $form->handleRequest($request);
+    {
+        $form = $this->createForm(SearchFormType::class, null);
+        $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Perform the search based on the submitted data
-        $searchQuery = $form->get('position')->getData();
-        $posId = $searchQuery->getId();
-        $users = $doctrine->getRepository(User::class)->SearchByPosition($posId);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Perform the search based on the submitted data
+            $searchQuery = $form->get('position')->getData();
+            $posId = $searchQuery->getId();
+            $users = $doctrine->getRepository(User::class)->SearchByPosition($posId);
 
-        // ->get('position')
-        // ... Your search logic here ...
-        // Return the search results to the view
-        return $this->render('search/results.html.twig', [
-            'results' => $users
-        ]);
+            // ->get('position')
+            // ... Your search logic here ...
+            // Return the search results to the view
+            return $this->render('search/results.html.twig', [
+                'results' => $users
+            ]);
+        }
+        return $this->render(
+            'search/search.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
-    return $this->render('search/search.html.twig',
-    [
-        'form' => $form->createView(),
-    ]);
-}
 
 }

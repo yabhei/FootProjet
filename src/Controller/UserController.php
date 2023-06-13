@@ -24,7 +24,7 @@ class UserController extends AbstractController
     // {
     //     $this->entityManager = $entityManager;
     // }
-    
+
     #[Route('/user', name: 'app_user')]
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
@@ -91,11 +91,11 @@ class UserController extends AbstractController
     #[Route('/user/list', name: 'list_user')]
     public function ListUsers(ManagerRegistry $doctrine): Response
     {
-        $users = $doctrine->getRepository(User::class) ->findAll();
-        
+        $users = $doctrine->getRepository(User::class)->findAll();
+
         return $this->render('user/index.html.twig', [
-            'users'=>$users
-        
+            'users' => $users
+
         ]);
     }
 
@@ -105,36 +105,36 @@ class UserController extends AbstractController
     // public function addUserToTeam(ManagerRegistry $doctrine): Response
     // {
     //     $users = $doctrine->getRepository(User::class) ->findAll();
-        
+
     //     return $this->render('user/usertoadd.html.twig', [
     //         'users'=>$users
-        
+
     //     ]);
     // }
 
 
-    #[Route('/user_details/{id}', name:'details_user')]
-    public function  details_User( User $user): Response
+    #[Route('/user_details/{id}', name: 'details_user')]
+    public function details_User(User $user): Response
     {
-        
+
         return $this->render('user/detailsUser.html.twig', [
-            'user'=>$user,
-            
-            
-        
+            'user' => $user,
+
+
+
         ]);
 
     }
 
-    #[Route('/my_details/{id}', name:'my_details')]
-    public function  My_details( User $user): Response
+    #[Route('/my_details/{id}', name: 'my_details')]
+    public function My_details(User $user): Response
     {
-        
+
         return $this->render('user/My_details.html.twig', [
-            'user'=>$user,
-            
-            
-        
+            'user' => $user,
+
+
+
         ]);
 
     }
@@ -144,16 +144,16 @@ class UserController extends AbstractController
     // {
     //     $form = $this->createForm(SearchType::class);
     //     $form->handleRequest($request);
-    
+
     //     // Fetch all players initially
     //     $players = $this->getDoctrine()->getRepository(User::class)->findAll();
-    
+
     //     if ($form->isSubmitted() && $form->isValid()) {
     //         $position = $form->getData()['position'];
     //         // Fetch players based on the selected position
     //         $players = $this->getDoctrine()->getRepository(User::class)->findBy(['position' => $position]);
     //     }
-    
+
     //     return new JsonResponse(['players' => $players]);
     // }
 

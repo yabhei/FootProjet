@@ -39,7 +39,7 @@ class TeamRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
+    //    /**
 //     * @return Team[] Returns an array of Team objects
 //     */
 //    public function findByExampleField($value): array
@@ -54,7 +54,7 @@ class TeamRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Team
+    //    public function findOneBySomeField($value): ?Team
 //    {
 //        return $this->createQueryBuilder('t')
 //            ->andWhere('t.exampleField = :val')

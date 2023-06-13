@@ -39,7 +39,7 @@ class PlayerRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
+    //    /**
 //     * @return Player[] Returns an array of Player objects
 //     */
 //    public function findByExampleField($value): array
@@ -54,7 +54,7 @@ class PlayerRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Player
+    //    public function findOneBySomeField($value): ?Player
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

@@ -8,25 +8,26 @@
 
 <div id="teamt" style="margin: 3%;">
     <h1>Details of the team :</h1>
-<table class="table table-dark table-hover">
-    <thead>
-        <th>Name</th>
-        <th>Country</th>
-        <th>City</th>
-        <th>Creation date</th>
-        <th>Captain</th>
-    </thead>
-    <tbody>
-        <tr>
-          <td><strong> <a href="{{ path('details_team', {'id' : team.id }) }}"> {{ team.name }} </a> </strong> </td>
-          <td><strong> {{ team.country }} </strong> </td>
-          <td><strong> {{ team.city }} </strong> </td>
-          <td><strong> {{ team.creationDate|date("d/m/Y") }} </strong> </td>
-          <td><strong> {{ team.captain }} </strong> </td>
-        </tr>
-    </tbody>
+    <table class="table table-dark table-hover">
+        <thead>
+            <th>Name</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Creation date</th>
+            <th>Captain</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong> <a href="{{ path('details_team', {'id' : team.id }) }}"> {{ team.name }} </a> </strong>
+                </td>
+                <td><strong> {{ team.country }} </strong> </td>
+                <td><strong> {{ team.city }} </strong> </td>
+                <td><strong> {{ team.creationDate|date("d/m/Y") }} </strong> </td>
+                <td><strong> {{ team.captain }} </strong> </td>
+            </tr>
+        </tbody>
 
-</table>
+    </table>
 </div>
 
 {% if team.users |length>0 %}
@@ -41,12 +42,21 @@
 
 
     <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th></th>
+            </tr>
+        </thead>
         <tbody>
             {% for user in team.users %}
             <tr>
                 <td><strong> <a href="{{path('details_user', {'id' : user.id})}}"> {{ user.firstname }}
                             {{user.lastname}} </a> </strong></td>
-                {% if app.user == team.captain %}
+                <td><strong> {{ user.position}}
+                    </strong> </td>
+                {% if app.user == team.captain or is_granted('ROLE_ADMIN') %}
                 <td>
                     <a class="btn btn-danger" href="{{path('remove_userfromteam', {'id':team.id, 'id_user':user.id})}}"
                         style="float: right;">Remove</a>
@@ -69,20 +79,34 @@
 <h2 class="" style="background-color: darkgoldenrod;">Good job, your team is complete <i
         class="fa-solid fa-party-horn"></i></h2>
 {% endif %}
-{% if team.users|length < 11 and app.user == team.captain %} <div id="tusers" style="margin: 3%;">
+{% if (team.users|length < 11 and app.user==team.captain) or is_granted('ROLE_ADMIN') %} <div id="tusers"
+    style="margin: 3%;">
 
-    <a href="">
-        <h2>Add Players : </h2>
-    </a>
+    <div style="display: inline-block;">
+        <h2 style="display: inline-block;">Add Players : </h2>
+    </div>
+    <div class="search">
+        <a href="{{ path('search_user') }}" class="btn btn-primary" style="background-color: rgb(54, 70, 159);">Search
+            By Position</a>
+    </div>
     <div class="overflow-auto">
         <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th></th>
+                </tr>
+            </thead>
             <tbody>
                 {% for user in users %}
                 <tr>
                     {% if not user.team %}
                     <td><strong> <a href="{{path('details_user', {'id' : user.id})}}">
                                 {{ user.firstname}} {{user.lastname}} </a> </strong> </td>
-                    {% if app.user == team.captain %}
+                    <td><strong> {{ user.position}}
+                        </strong> </td>
+                    {% if app.user == team.captain or is_granted('ROLE_ADMIN') %}
                     <td>
                         <a class="btn btn-primary" href="{{path('add_usertoteam', {'id':team.id, 'id_user':user.id})}}"
                             style="float: right;">Add</a>
@@ -99,6 +123,6 @@
         </table>
     </div>
     </div>
-   
 
-{% endblock %}
+
+    {% endblock %}

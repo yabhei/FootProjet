@@ -39,7 +39,7 @@ class PositionRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
+    //    /**
 //     * @return Position[] Returns an array of Position objects
 //     */
 //    public function findByExampleField($value): array
@@ -54,7 +54,7 @@ class PositionRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Position
+    //    public function findOneBySomeField($value): ?Position
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

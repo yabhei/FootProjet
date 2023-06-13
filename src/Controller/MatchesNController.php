@@ -18,9 +18,9 @@ class MatchesNController extends AbstractController
     #[Route('/matches/n', name: 'app_matches')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        $matches = $doctrine->getRepository(MatchesN::class) ->findAll();
+        $matches = $doctrine->getRepository(MatchesN::class)->findAll();
         return $this->render('matches_n/index.html.twig', [
-           'matches'=> $matches
+            'matches' => $matches
         ]);
     }
 
@@ -28,52 +28,52 @@ class MatchesNController extends AbstractController
 
     #[Route('/match', name: 'make_match')] // Defines a new route
     #[Route('/match/edit/{id}', name: 'update_match')]
-public function CreateMatch(EntityManagerInterface $em, Request $request,CsrfTokenManagerInterface $csrfTokenManager, MatchesN $match = null): Response // Defines a function with two parameters, the first one is an instance of ManagerRegistry class and the second one is a Request object. It returns a Response object.
-{
+    public function CreateMatch(EntityManagerInterface $em, Request $request, CsrfTokenManagerInterface $csrfTokenManager, MatchesN $match = null): Response // Defines a function with two parameters, the first one is an instance of ManagerRegistry class and the second one is a Request object. It returns a Response object.
+    {
 
-      // Récupérer le jeton CSRF envoyé avec la requête
-      $token = $request->request->get('_csrf_token');
+        // Récupérer le jeton CSRF envoyé avec la requête
+        $token = $request->request->get('_csrf_token');
 
-      // Vérifier le jeton CSRF
-    //   if (!$csrfTokenManager->isTokenValid(new CsrfToken('form_token', $token))) {
-    //       throw $this->createAccessDeniedException('Invalid CSRF token.');
-    //   }
+        // Vérifier le jeton CSRF
+        //   if (!$csrfTokenManager->isTokenValid(new CsrfToken('form_token', $token))) {
+        //       throw $this->createAccessDeniedException('Invalid CSRF token.');
+        //   }
 
-    // Create a new Matches object
-    
-if(!$match){
-    $match = new MatchesN();
-}
-    
-    // Create a form object using the TeamType class and the $team object
-    $form = $this->createForm(MatchesNType::class, $match );
+        // Create a new Matches object
 
-    // Handle the form submission
-    $form->handleRequest($request);
+        if (!$match) {
+            $match = new MatchesN();
+        }
 
-    if ($form->isSubmitted() && $form->isValid()) { // If the form is submitted and valid
+        // Create a form object using the TeamType class and the $team object
+        $form = $this->createForm(MatchesNType::class, $match);
 
-        // Get the data from the form
-        $match = $form->getData();
+        // Handle the form submission
+        $form->handleRequest($request);
 
-        // Get the entity manager and persist the match object
-        //$entityManager = $doctrine->getManager();
-        $em->persist($match);
+        if ($form->isSubmitted() && $form->isValid()) { // If the form is submitted and valid
 
-        // Flush changes to the database
-        $em->flush();
+            // Get the data from the form
+            $match = $form->getData();
 
-        // Redirect to the match page
-        return $this->redirectToRoute("app_matches");
+            // Get the entity manager and persist the match object
+            //$entityManager = $doctrine->getManager();
+            $em->persist($match);
 
-    }
+            // Flush changes to the database
+            $em->flush();
+
+            // Redirect to the match page
+            return $this->redirectToRoute("app_matches");
+
+        }
 
         // Render the add match form template
         return $this->render('matches_n/MakeMatch.html.twig', [
             'form' => $form->createView(),
-            
+
         ]);
-}
+    }
 
 
 

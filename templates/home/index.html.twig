@@ -1,18 +1,19 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %} Home Page {% endblock %}
 
 {% block body %}
-    {% if app.user %}
-    <div style="display: flex; justify-content: center;">
+{% if app.user %}
+<div style="display: flex; justify-content: center;">
 
-        <h1 style="width: fit-content;">    Hi {{app.user.firstname}} {{ app.user.lastname }}    </h1>
-    </div>
-    {% else %}
-    <div style=" display: flex; justify-content: center;">
+    <h1 style="width: fit-content;"> Hi {{app.user.firstname}} {{ app.user.lastname }} </h1>
+</div>
+{% else %}
+<div style=" display: flex; justify-content: center;">
 
-        <h4 style="background-color: rgb(184, 11, 11); width: fit-content;">Already member? Pleas <a href="{{ path('app_login') }}"> Sign in </a> <br> OR <a href="{{ path('app_register') }}"> Sign up </a> to be the new <strong> GOAT </strong> </h4>
-    </div>
-    {% endif %}
+    <h4 style="background-color: rgb(184, 11, 11); width: fit-content;">Already member? Pleas <a
+            href="{{ path('app_login') }}"> Sign in </a> <br> OR <a href="{{ path('app_register') }}"> Sign up </a> to
+        be the new <strong> GOAT </strong> </h4>
+</div>
+{% endif %}
 {% endblock %}

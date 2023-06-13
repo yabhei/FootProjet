@@ -1,10 +1,11 @@
 /* ==================== Responsive ====================== */
 
-@media (max-width: 700px) { 
- .list-players{
-  font-family: 'Courier New', Courier, monospace;
- }
- /* nav ul {
+@media (max-width: 700px) {
+  .list-players {
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  /* nav ul {
   display: flex;
   justify-content: baseline;
  } */
@@ -88,11 +89,14 @@ body {
   width: 100%;
 }
 
-h1, h2, h3, h4{
+h1,
+h2,
+h3,
+h4 {
   background-color: #333;
   border-radius: 7px;
   font-family: serif;
-  
+
 }
 
 
@@ -103,7 +107,8 @@ h1, h2, h3, h4{
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 0%;
-  height: 100vh; /*Adjust the height as needed */
+  height: 100vh;
+  /*Adjust the height as needed */
   color: hsla(0, 23%, 92%, 0.932);
   width: 100%;
 }
@@ -159,7 +164,7 @@ h1, h2, h3, h4{
   background-color: cadetblue;
   color: white;
 }
- 
+
 
 .finished-matches {
   border-radius: 10px;
@@ -254,7 +259,7 @@ h1, h2, h3, h4{
 /* ========================= Form ============================*/
 .my-form {
   background-color: #1a0202;
-  }
+}
 
 
 
@@ -266,7 +271,7 @@ h1, h2, h3, h4{
 /* ========================= Footer ============================*/
 
 
-.footer{
+.footer {
   position: absolute;
   bottom: 0;
   left: 0;
