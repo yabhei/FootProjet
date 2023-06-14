@@ -31,7 +31,7 @@ class SearchController extends AbstractController
             // Perform the search based on the submitted data
             $searchQuery = $form->get('position')->getData();
             $posId = $searchQuery->getId();
-            $users = $doctrine->getRepository(User::class)->SearchByPosition($posId);
+            $users = $doctrine->getRepository(User::class)->searchByPosition($posId);
 
             // ->get('position')
             // ... Your search logic here ...

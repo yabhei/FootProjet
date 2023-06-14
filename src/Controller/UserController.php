@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
@@ -138,6 +139,21 @@ class UserController extends AbstractController
         ]);
 
     }
+
+    
+    #[Route('/user/delete/{id}', name: 'delete_user')]
+    public function deleteAccount($id,ManagerRegistry $doctrine, Request $request, SessionInterface $session)
+    {
+        $user = $doctrine->getRepository(User::class)->find($id);
+        $doctrine->getRepository(User::class)->remove($user);
+        return $this->render('home/index.html.twig');
+
+    }  
+
+        // $session->invalidate();
+        // throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+
+    
 
 
     // public function search(Request $request)

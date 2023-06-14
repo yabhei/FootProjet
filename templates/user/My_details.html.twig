@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TeamController!{% endblock %}
+{% block title %}My profile{% endblock %}
 
 {% block body %}
 
@@ -38,5 +38,10 @@
         </tbody>
 
     </table>
+    <div>
+        <a href="" class="btn btn-danger">Delete Account</a>
+        {# {{ path('delete_user', {'id' : user.id}) }} #}
+    </div>
+
 </div>
 {% endblock %}

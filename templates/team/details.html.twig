@@ -46,6 +46,7 @@
             <tr>
                 <th>Name</th>
                 <th>Position</th>
+                <th>Rating</th>
                 <th></th>
             </tr>
         </thead>
@@ -56,6 +57,7 @@
                             {{user.lastname}} </a> </strong></td>
                 <td><strong> {{ user.position}}
                     </strong> </td>
+                    <td><strong>{{ user.rating}}</strong></td>
                 {% if app.user == team.captain or is_granted('ROLE_ADMIN') %}
                 <td>
                     <a class="btn btn-danger" href="{{path('remove_userfromteam', {'id':team.id, 'id_user':user.id})}}"

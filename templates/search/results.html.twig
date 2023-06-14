@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SearchController!{% endblock %}
+{% block title %}players by Position{% endblock %}
 
 {% block body %}
 {# Display each search result #}
@@ -14,6 +14,7 @@
             <th>Name</th>
             <th>Team</th>
             <th>Position</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +30,7 @@
 
             <td> <a href="{{ path('details_team', {'id' : user.team.id }) }}"> {{ user.team }} </a> </td>
             {% else %}
+
             <td>
 
                 {{ "-" }}
@@ -36,6 +38,19 @@
             {% endif %}
             <td><strong> {{ user.position}}
                 </strong> </td>
+
+            {% if not user.team %}
+            <td>
+                <a class="btn btn-primary"
+                    href="{{path('add_usertoteam', {'id': app.user.team.id , 'id_user' : user.id})}}"
+                    style="float: right;">Add</a>
+            </td>
+            {% else %}
+            <td>
+
+            </td>
+            {% endif %}
+
         </tr>
         {% endfor %}
     </tbody>

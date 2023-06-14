@@ -15,8 +15,10 @@
                 <td><strong> <a href="{{ path('details_team', {'id' : team.id }) }}"> {{ team }} </a> </strong> </td>
                 {% if is_granted('ROLE_ADMIN') or app.user == team.captain %}
                 <td>
-                    <a class="btn btn-danger" href="{{path('remove_team', {'id':team.id})}}">Remove</a>
+                    <a class="btn btn-danger" href="">Remove</a>
+                    {# {{path('remove_team', {'id':team.id})}} #}
                 </td>
+                
                 {% else %}
                 <td>
 
